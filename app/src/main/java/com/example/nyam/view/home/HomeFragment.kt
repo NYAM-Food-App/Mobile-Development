@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.nyam.R
 import com.example.nyam.databinding.FragmentHomeBinding
 
@@ -28,6 +29,8 @@ class HomeFragment : Fragment() {
         //Tes ProgressBar onClick aja, bisa dihapus
         binding.cardDailyReport.progressBarCalories.setOnClickListener {
             binding.cardDailyReport.progressBarCalories.progress += 10
+            //Ini perubahan dari main ke branch coba
+            Toast.makeText(context, "coba branching", Toast.LENGTH_SHORT).show()
         }
 
     }
