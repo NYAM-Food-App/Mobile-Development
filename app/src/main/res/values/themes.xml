@@ -19,6 +19,7 @@
     </style>
     <style name="Theme.NYAM" parent="Base.Theme.NYAM" />
 
+<!--to make ShapeImageView rounded -->
     <style name="ImageView.Corner" parent="">
         <item name="cornerSizeTopRight">8dp</item>
         <item name="cornerSizeTopLeft">8dp</item>
