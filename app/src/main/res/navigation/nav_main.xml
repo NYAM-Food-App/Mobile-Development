@@ -11,11 +11,6 @@
         android:label="activity_main"
         tools:layout="@layout/activity_onboarding" />
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.nyam.view.login.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
-    <fragment
         android:id="@+id/personalDataFragment"
         android:name="com.example.nyam.PersonalDataFragment"
         android:label="fragment_personal_data"
