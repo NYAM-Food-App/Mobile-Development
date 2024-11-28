@@ -11,7 +11,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.nyam.R
 import com.example.nyam.adapter.OnBoardingAdapter
 import com.example.nyam.databinding.ActivityOnboardingBinding
-import com.example.nyam.view.login.LoginFragment
+import com.example.nyam.view.login.LoginActivity
 
 class OnBoardingActivity : AppCompatActivity() {
 
@@ -20,11 +20,13 @@ class OnBoardingActivity : AppCompatActivity() {
             changeCircleMark(position)
         }
     }
-    private lateinit var binding: ActivityOnboardingBinding
 
+    private var _binding: ActivityOnboardingBinding? = null
+
+    private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityOnboardingBinding.inflate(layoutInflater)
+        _binding = ActivityOnboardingBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -33,11 +35,12 @@ class OnBoardingActivity : AppCompatActivity() {
             insets
         }
 
-        binding.btnSkip.setOnClickListener {
-            val intent = Intent(this.baseContext, LoginFragment::class.java)
-            startActivity(intent)
+        supportActionBar?.hide()
 
-        }
+        binding.btnSkip.setOnClickListener {
+            val intent = Intent(this.baseContext, LoginActivity::class.java)
+            startActivity(intent)
+}
 
         val numberOfScreens = resources.getStringArray(R.array.onboard_header).size
         val onBoardingAdapter = OnBoardingAdapter(this, numberOfScreens)
@@ -53,11 +56,13 @@ class OnBoardingActivity : AppCompatActivity() {
                 binding.onboardingMiddleCircle.background = getDrawable(R.drawable.circle_gray)
                 binding.onboardingLastCircle.background = getDrawable(R.drawable.circle_gray)
             }
+
             1 -> {
                 binding.onboardingInitialCircle.background = getDrawable(R.drawable.circle_gray)
                 binding.onboardingMiddleCircle.background = getDrawable(R.drawable.circle_selected)
                 binding.onboardingLastCircle.background = getDrawable(R.drawable.circle_gray)
             }
+
             2 -> {
                 binding.onboardingInitialCircle.background = getDrawable(R.drawable.circle_gray)
                 binding.onboardingMiddleCircle.background = getDrawable(R.drawable.circle_gray)
