@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/main"
     android:layout_height="match_parent"
-    tools:context=".PersonalDataFragment">
+    tools:context=".view.personal.PersonalDataActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -24,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="180dp"
+            android:layout_marginTop="150dp"
             android:layout_marginEnd="50dp"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,49 +64,68 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Your Name"
+                android:text="Name"
                 android:textColor="@color/grey"
                 android:textSize="12sp" />
 
             <EditText
+                android:id="@+id/et_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_outline"
+                android:hint="Fill your name"
+                android:padding="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Your Name"
+                android:text="Gender"
                 android:textColor="@color/grey"
                 android:textSize="12sp" />
 
-            <EditText
+            <Spinner
+                android:id="@+id/spin_gender"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_outline"
+                android:entries="@array/gender"
+                android:padding="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Your Name"
+                android:text="Age"
                 android:textColor="@color/grey"
                 android:textSize="12sp" />
 
             <EditText
+                android:id="@+id/et_age"
+                android:background="@drawable/button_outline"
+                android:padding="10dp"
+                android:hint="Fill your age"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="number|numberDecimal" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Your Name"
+                android:text="Allergy"
                 android:textColor="@color/grey"
                 android:textSize="12sp" />
 
-            <EditText
+            <com.example.nyam.custom.customDropDialog
+                android:id="@+id/spin_allergy"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_outline"
+                android:entries="@array/allergies"
+                android:padding="10dp"
+                android:hint="Allergies"
+                android:spinnerMode="dialog" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -121,17 +141,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="Your Name"
+                        android:text="Weight(kg)"
                         android:textColor="@color/grey"
                         android:textSize="12sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
-                        android:id="@+id/et_height"
+                        android:background="@drawable/button_outline"
+                        android:padding="10dp"
+                        android:hint="Weight"
+                        android:id="@+id/et_weight"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        app:layout_constraintRight_toLeftOf="@+id/et_weight"
+                        app:layout_constraintRight_toLeftOf="@+id/et_height"
 
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/label_height" />
@@ -143,14 +166,17 @@
                         android:layout_marginStart="120dp"
 
                         android:layout_marginTop="16dp"
-                        android:text="Your Name"
+                        android:text="Height(cm)"
                         android:textColor="@color/grey"
                         android:textSize="12sp"
                         app:layout_constraintStart_toEndOf="@+id/label_height"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
-                        android:id="@+id/et_weight"
+                        android:id="@+id/et_height"
+                        android:background="@drawable/button_outline"
+                        android:padding="10dp"
+                        android:hint="Height"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -159,12 +185,13 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/submit"
+                android:layout_marginTop="24dp"
 
-                android:layout_marginTop="24dp"/>
+                android:text="@string/submit" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

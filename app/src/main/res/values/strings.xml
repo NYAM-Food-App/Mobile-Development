@@ -14,7 +14,21 @@
             Track Your Daily Nutrition and Calories
         </item>
     </string-array>
-
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string-array name="allergies">
+        <item>Gluten</item>
+        <item>Fish</item>
+        <item>Dairy</item>
+        <item>Shellfish</item>
+        <item>Eggs</item>
+        <item>Tree Nuts</item>
+        <item>Soy</item>
+        <item>Peanuts</item>
+        <item>Wheat</item>
+    </string-array>
     <string-array name="onboard_desc">
         <item>
             We’re here to help you achieve a balanced and nutritious diet.

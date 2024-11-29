@@ -28,6 +28,8 @@ class OnBoardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityOnboardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        actionBar?.hide()
+        supportActionBar?.hide()
         enableEdgeToEdge()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -37,7 +39,7 @@ class OnBoardingActivity : AppCompatActivity() {
 
 
         binding.btnSkip.setOnClickListener {
-            val intent = Intent(this.baseContext, LoginActivity::class.java)
+            val intent = Intent(baseContext, LoginActivity::class.java)
             startActivity(intent)
 }
 
