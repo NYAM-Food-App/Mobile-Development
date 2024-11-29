@@ -12,8 +12,8 @@
         tools:layout="@layout/activity_onboarding" />
     <fragment
         android:id="@+id/personalDataFragment"
-        android:name="com.example.nyam.PersonalDataFragment"
+        android:name="com.example.nyam.view.personal.PersonalDataActivity"
         android:label="fragment_personal_data"
-        tools:layout="@layout/fragment_personal_data" />
+        tools:layout="@layout/activity_personal_data" />
 
 </navigation>

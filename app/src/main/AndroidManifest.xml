@@ -25,6 +25,9 @@
             android:name=".view.login.LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".view.personal.PersonalDataActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
 

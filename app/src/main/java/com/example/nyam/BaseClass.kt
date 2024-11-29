@@ -12,7 +12,6 @@ open class BaseClass(private val profile : Boolean) : AppCompatActivity() {
         supportActionBar?.setCustomView(R.layout.app_bar)
         supportActionBar?.setDisplayShowCustomEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        supportActionBar?.isHideOnContentScrollEnabled = true
 
 //        supportActionBar?.setBackgroundDrawable(theme.resources.getColor())
     }

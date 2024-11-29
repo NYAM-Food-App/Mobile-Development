@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.nyam.MainActivity
+import com.example.nyam.view.personal.PersonalDataActivity
 import com.example.nyam.R
 import com.example.nyam.databinding.ActivityLoginBinding
 
@@ -29,7 +30,11 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         binding.Signin.setOnClickListener{
-            val intent = Intent(this.baseContext, MainActivity::class.java)
+            val intent = Intent(baseContext, MainActivity::class.java)
+            startActivity(intent)
+        }
+        binding.loginToRegister.setOnClickListener{
+            val intent = Intent(baseContext, PersonalDataActivity::class.java)
             startActivity(intent)
         }
     }
