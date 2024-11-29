@@ -18,6 +18,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="50dp"
             android:text="Recommendations\nFor You"
+            android:fontFamily="@font/poppins_medium"
             android:textColor="@color/main_color"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
