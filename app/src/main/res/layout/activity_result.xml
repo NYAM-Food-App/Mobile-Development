@@ -28,7 +28,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_marginHorizontal="65dp"
-        android:fontFamily="@font/poppins_bold"
+        android:fontFamily="@font/roboto_black"
         android:layout_height="wrap_content"
         android:background="@drawable/button_green"
 

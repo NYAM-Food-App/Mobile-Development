@@ -46,11 +46,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textColor="@color/main_color"
                             android:text="Weight" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textColor="@color/main_color"
                             android:text="45 kg" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -71,11 +75,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textColor="@color/main_color"
                             android:text="Height" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textColor="@color/main_color"
                             android:text="45 kg" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -92,11 +100,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="24sp"
+                android:textColor="@color/transparent_black"
                 android:text="MBI : " />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="24sp"
+                android:textColor="@color/transparent_black"
                 android:text="15.5" />
 
 

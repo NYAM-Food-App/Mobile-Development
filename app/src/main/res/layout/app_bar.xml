@@ -17,8 +17,8 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textColor="@color/main_color"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:textSize="20sp"
+        android:fontFamily="@font/poppins_bold"
         android:layout_marginStart="10dp"
         />
 </LinearLayout>
