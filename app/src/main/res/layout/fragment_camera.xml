@@ -49,7 +49,7 @@
 
 
             <Button
-                android:background="@drawable/button_green"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small"
                 android:id="@+id/btn_camera"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
                 android:fontFamily="@font/roboto_black"/>
 
             <Button
-                android:background="@drawable/button_green"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small"
                 android:id="@+id/btn_upload"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
