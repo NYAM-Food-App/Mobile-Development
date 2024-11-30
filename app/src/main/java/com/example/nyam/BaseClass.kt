@@ -1,10 +1,10 @@
 package com.example.nyam
 
 import android.content.Intent
-import android.graphics.drawable.ColorDrawable
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.example.nyam.view.profile.ProfileActivity
 
 open class BaseClass(private val profile : Boolean) : AppCompatActivity() {
 
@@ -22,9 +22,9 @@ open class BaseClass(private val profile : Boolean) : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        val historyIntent = Intent(this, HistoryActivity::class.java)
-//        startActivity(historyIntent)
-//        return super.onOptionsItemSelected(item)
-//    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val intent = Intent(this, ProfileActivity::class.java)
+        startActivity(intent)
+        return super.onOptionsItemSelected(item)
+    }
 }

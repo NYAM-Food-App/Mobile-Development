@@ -4,13 +4,17 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
+import com.example.nyam.MainActivity
 import com.example.nyam.R
 import com.example.nyam.adapter.OnBoardingAdapter
 import com.example.nyam.databinding.ActivityOnboardingBinding
+import com.example.nyam.helper.ViewModelFactory
+import com.example.nyam.view.MainViewModel
 import com.example.nyam.view.login.LoginActivity
 
 class OnBoardingActivity : AppCompatActivity() {
@@ -22,21 +26,24 @@ class OnBoardingActivity : AppCompatActivity() {
     }
 
     private var _binding: ActivityOnboardingBinding? = null
-
     private val binding get() = _binding!!
+
+    private val viewModel by viewModels<MainViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityOnboardingBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        actionBar?.hide()
         supportActionBar?.hide()
-        enableEdgeToEdge()
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        setContentView(binding.root)
 
+        viewModel.getSession().observe(this) { user ->
+            if (user.isLogin) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
+        }
 
         binding.btnSkip.setOnClickListener {
             val intent = Intent(baseContext, LoginActivity::class.java)
