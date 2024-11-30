@@ -7,13 +7,22 @@
         <item name="colorTertiary">#77574e</item>
         <item name="colorPrimaryContainer">#ffdbd1</item>
         <item name="colorSecondaryContainer">@color/main_color_33</item>
-
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView </item>
 
 <!--         <item name="actionBarStyle">@style/MyActionBar</item>-->
 <!--        <item name="android:windowActionBarOverlay">true</item>-->
 <!--        <item name="windowActionBarOverlay">true</item>-->
 
     </style>
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+    </style>
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorSurface">@color/main_color_33</item>
+        <item name="colorOnSurfaceVariant">@color/main_color</item>
+    </style>
+
     <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">@color/white</item>
     </style>

@@ -198,6 +198,7 @@
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:textColor="@color/white"
             android:layout_marginHorizontal="42dp"
             android:background="@drawable/button_green"
             android:text="Edit Personal Data"

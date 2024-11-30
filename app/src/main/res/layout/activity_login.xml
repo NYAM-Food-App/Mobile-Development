@@ -26,7 +26,6 @@
         android:layout_marginTop="24dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Let’s Get You Started With NYAM!"
-        android:textColor="@color/transparent_black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +67,6 @@
                 android:fontFamily="@font/urbanist_bold"
                 android:text="Sign in with Google"
                 android:textAlignment="center"
-                android:textColor="@color/transparent_black"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -90,7 +88,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
             android:text="New to NYAM?"
-            android:textColor="@color/transparent_black"
             android:textSize="13sp" />
 
         <TextView

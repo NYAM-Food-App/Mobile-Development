@@ -15,15 +15,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Calories"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"
             android:fontFamily="@font/poppins_semibold"
-            android:textSize="24sp"
-            android:textColor="@color/transparent_black"
+            android:text="Calories"
             android:textAlignment="center"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,24 +45,21 @@
                 android:layout_alignStart="@id/progressBar_calories"
                 android:layout_alignTop="@id/progressBar_calories"
                 android:layout_alignEnd="@id/progressBar_calories"
-                android:background="#00000000"
+                android:layout_alignBottom="@id/progressBar_calories"
                 android:fontFamily="@font/poppins_semibold"
                 android:gravity="center"
-                android:text="80%"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
-        </RelativeLayout>
+                android:text="80%" />
 
+        </RelativeLayout>
         <TextView
             android:id="@+id/values_calories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/poppins_semibold"
             android:text="800/1000 Cal"
             android:textAlignment="center"
-            android:fontFamily="@font/poppins_semibold"
-            android:textSize="10sp"
-            android:textColor="@color/transparent_black"/>
+            android:textSize="10sp" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -84,10 +80,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:text="Fat"
                     android:fontFamily="@font/poppins_medium"
-                    android:textSize="16sp"
+                    android:text="Fat"
                     android:textColor="@color/white"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -128,10 +124,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="400/1000 Cal"
                     android:fontFamily="@font/poppins_semibold"
-                    android:textSize="10sp"
+                    android:text="400/1000 Cal"
                     android:textColor="@color/white"
+                    android:textSize="10sp"
                     app:layout_constraintEnd_toEndOf="@id/relative_fat"
                     app:layout_constraintStart_toStartOf="@id/relative_fat"
                     app:layout_constraintTop_toBottomOf="@id/relative_fat" />
@@ -143,10 +139,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:text="Carbs"
                     android:fontFamily="@font/poppins_medium"
-                    android:textSize="16sp"
+                    android:text="Carbs"
                     android:textColor="@color/white"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/values_fat" />
 
@@ -185,12 +181,12 @@
                 <TextView
                     android:id="@+id/values_carbs"
                     android:layout_width="wrap_content"
-                    android:layout_marginTop="5dp"
                     android:layout_height="wrap_content"
-                    android:text="500/1000 Cal"
+                    android:layout_marginTop="5dp"
                     android:fontFamily="@font/poppins_semibold"
-                    android:textSize="10sp"
+                    android:text="500/1000 Cal"
                     android:textColor="@color/white"
+                    android:textSize="10sp"
                     app:layout_constraintEnd_toEndOf="@id/relative_carbs"
                     app:layout_constraintStart_toStartOf="@id/relative_carbs"
                     app:layout_constraintTop_toBottomOf="@id/relative_carbs" />
@@ -201,10 +197,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:text="Protein"
                     android:fontFamily="@font/poppins_medium"
-                    android:textSize="16sp"
+                    android:text="Protein"
                     android:textColor="@color/white"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/values_carbs" />
 
@@ -244,10 +240,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="600/1000 Cal"
                     android:fontFamily="@font/poppins_semibold"
-                    android:textSize="10sp"
+                    android:text="600/1000 Cal"
                     android:textColor="@color/white"
+                    android:textSize="10sp"
                     app:layout_constraintEnd_toEndOf="@id/relative_protein"
                     app:layout_constraintStart_toStartOf="@id/relative_protein"
                     app:layout_constraintTop_toBottomOf="@id/relative_protein" />

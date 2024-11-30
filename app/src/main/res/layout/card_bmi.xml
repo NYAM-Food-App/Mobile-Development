@@ -47,6 +47,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
+                            android:textAlignment="center"
+                            android:textSize="16sp"
                             android:textColor="@color/main_color"
                             android:text="Weight" />
 
@@ -54,6 +56,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
+                            android:textSize="24sp"
                             android:textColor="@color/main_color"
                             android:text="45 kg" />
                     </LinearLayout>
@@ -75,6 +78,9 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textSize="16sp"
+                            android:textAlignment="center"
                             android:fontFamily="@font/poppins_semibold"
                             android:textColor="@color/main_color"
                             android:text="Height" />
@@ -83,8 +89,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
+                            android:textSize="24sp"
                             android:textColor="@color/main_color"
-                            android:text="45 kg" />
+                            android:text="45 cm" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
@@ -102,7 +109,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semibold"
                 android:textSize="24sp"
-                android:textColor="@color/transparent_black"
                 android:text="MBI : " />
 
             <TextView
@@ -110,7 +116,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semibold"
                 android:textSize="24sp"
-                android:textColor="@color/transparent_black"
                 android:text="15.5" />
 
 

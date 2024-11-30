@@ -23,9 +23,12 @@ class MainActivity : BaseClass(true) {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
         val navView : BottomNavigationView = findViewById(R.id.nav_view)
         val radius = resources.getDimension(R.dimen.cornerSize)
 
+        //Rounded NavView
         val shapeDrawable : MaterialShapeDrawable = navView.background as MaterialShapeDrawable
         shapeDrawable.shapeAppearanceModel = shapeDrawable.shapeAppearanceModel
             .toBuilder()
