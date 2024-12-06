@@ -20,7 +20,7 @@ data class UserData(
 	val allergy: List<String?>? = null,
 
 	@field:SerializedName("dailyNeeds")
-	val dailyNeeds: DailyNeeds? = null,
+	val dailyNeeds: DailyNeeds,
 
 	@field:SerializedName("profilePicture")
 	val profilePicture: Any? = null,
@@ -29,13 +29,13 @@ data class UserData(
 	val createdAt: String? = null,
 
 	@field:SerializedName("bmrRate")
-	val bmrRate: Int? = null,
+	val bmrRate: Int,
 
 	@field:SerializedName("fullname")
 	val fullname: String? = null,
 
 	@field:SerializedName("fulfilledNeeds")
-	val fulfilledNeeds: FulfilledNeeds? = null,
+	val fulfilledNeeds: FulfilledNeeds,
 
 	@field:SerializedName("email")
 	val email: String? = null,
@@ -65,16 +65,16 @@ data class FoodHistoryItem(
 data class FulfilledNeeds(
 
 	@field:SerializedName("carbs")
-	val carbs: Any? = null,
+	val carbs: Any,
 
 	@field:SerializedName("protein")
-	val protein: Any? = null,
+	val protein: Any,
 
 	@field:SerializedName("fat")
-	val fat: Any? = null,
+	val fat: Any,
 
 	@field:SerializedName("calories")
-	val calories: Any? = null
+	val calories: Any
 )
 
 data class SelectedFood(
@@ -104,22 +104,22 @@ data class SelectedFood(
 	val cuisineType: List<String?>? = null,
 
 	@field:SerializedName("fulfilledNeeds")
-	val fulfilledNeeds: FulfilledNeeds? = null
+	val fulfilledNeeds: FulfilledNeeds
 )
 
 data class DailyNeeds(
 
 	@field:SerializedName("carbs")
-	val carbs: Int? = null,
+	val carbs: Int,
 
 	@field:SerializedName("protein")
-	val protein: Int? = null,
+	val protein: Int,
 
 	@field:SerializedName("fat")
-	val fat: Int? = null,
+	val fat: Int,
 
 	@field:SerializedName("calories")
-	val calories: Int? = null
+	val calories: Int
 )
 
 data class Timestamp(

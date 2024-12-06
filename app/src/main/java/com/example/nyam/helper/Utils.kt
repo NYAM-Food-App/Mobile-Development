@@ -3,6 +3,7 @@ package com.example.nyam.helper
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.icu.text.DecimalFormat
 import android.net.Uri
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -48,4 +49,9 @@ fun File.reduceFileImage(): File {
 fun createCustomTempFile(context: Context): File {
     val filesDir = context.externalCacheDir
     return File.createTempFile(timeStamp, ".jpg", filesDir)
+}
+
+fun getPercent(fulfilled : Double, daily : Int):String{
+    val myFormat = DecimalFormat("#.00")
+    return myFormat.format(fulfilled / daily * 100)+"%"
 }

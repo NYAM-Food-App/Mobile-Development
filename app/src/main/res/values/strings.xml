@@ -3,6 +3,7 @@
     <string name="app_system">Food Recomendation System</string>
     <string name="app_title">NYAM (Not Your Average Menu)</string>
 
+
     <string-array name="onboard_header">
         <item>
             Welcome to NYAM!

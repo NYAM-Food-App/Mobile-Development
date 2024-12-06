@@ -29,7 +29,8 @@
             android:layout_height="30dp"
             android:layout_marginStart="40dp"
             android:layout_marginTop="26dp"
-            android:src="@drawable/rectangle_bmi_extreme_under"
+            android:background="@drawable/rectangle_bmi"
+            android:backgroundTint="@color/extreme_under"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,7 +42,8 @@
             android:layout_marginStart="85dp"
             android:layout_marginTop="26dp"
             android:elevation="5dp"
-            android:src="@drawable/rectangle_bmi_under"
+            android:background="@drawable/rectangle_bmi"
+            android:backgroundTint="@color/under"
             app:layout_constraintStart_toEndOf="@id/iv_bmi_ex_under"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,7 +55,8 @@
             android:layout_marginTop="26dp"
             android:layout_marginEnd="40dp"
             android:elevation="5dp"
-            android:src="@drawable/rectangle_bmi_normal"
+            android:background="@drawable/rectangle_bmi"
+            android:backgroundTint="@color/normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_bmi_under"
             app:layout_constraintTop_toTopOf="parent" />
@@ -101,7 +104,8 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="26dp"
-                android:src="@drawable/rectangle_bmi_overweight"
+                android:background="@drawable/rectangle_bmi"
+                android:backgroundTint="@color/overweight"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -113,7 +117,8 @@
                 android:layout_marginStart="85dp"
                 android:layout_marginTop="26dp"
                 android:elevation="5dp"
-                android:src="@drawable/rectangle_bmi_obesity"
+                android:background="@drawable/rectangle_bmi"
+                android:backgroundTint="@color/obesity"
                 app:layout_constraintStart_toEndOf="@id/iv_bmi_over"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -125,7 +130,8 @@
                 android:layout_marginTop="26dp"
                 android:layout_marginEnd="40dp"
                 android:elevation="5dp"
-                android:src="@drawable/rectangle_bmi_extreme_obesity"
+                android:background="@drawable/rectangle_bmi"
+                android:backgroundTint="@color/extreme_obesity"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_bmi_obesity"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -7,6 +7,7 @@ import com.example.nyam.data.di.Injection
 import com.example.nyam.data.NyamRepository
 import com.example.nyam.view.MainViewModel
 import com.example.nyam.view.camera.CameraViewModel
+import com.example.nyam.view.home.HomeViewModel
 
 class ViewModelFactory(private val repository: NyamRepository) :
     ViewModelProvider.NewInstanceFactory() {
@@ -18,6 +19,9 @@ class ViewModelFactory(private val repository: NyamRepository) :
         }
         else if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             return MainViewModel(repository) as T
+        }
+        else if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
+            return HomeViewModel(repository) as T
         }
         return super.create(modelClass)
     }

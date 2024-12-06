@@ -40,6 +40,7 @@
                 android:progressDrawable="@drawable/progress_bar_calories" />
 
             <TextView
+                android:id="@+id/percent_calories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@id/progressBar_calories"
@@ -106,6 +107,7 @@
                         android:progressDrawable="@drawable/progress_bar_fat" />
 
                     <TextView
+                        android:id="@+id/percent_fat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignStart="@id/progressBar_fat"
@@ -165,6 +167,7 @@
                         android:progressDrawable="@drawable/progress_bar_carbs" />
 
                     <TextView
+                        android:id="@+id/percent_carbs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignStart="@id/progressBar_carbs"
@@ -223,6 +226,7 @@
                         android:progressDrawable="@drawable/progress_bar_protein" />
 
                     <TextView
+                        android:id="@+id/percent_protein"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignStart="@id/progressBar_protein"
@@ -237,6 +241,7 @@
                 </RelativeLayout>
 
                 <TextView
+                    android:id="@+id/values_protein"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
