@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="10dp"
+    android:paddingVertical="10dp"
+    app:cardCornerRadius="17dp"
+    app:cardElevation="5dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        android:layout_marginStart="10dp"
+        android:fadingEdgeLength="10dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_bmi_ex_under"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="26dp"
+            android:src="@drawable/rectangle_bmi_extreme_under"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/iv_bmi_under"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="26dp"
+            android:elevation="5dp"
+            android:src="@drawable/rectangle_bmi_under"
+            app:layout_constraintStart_toEndOf="@id/iv_bmi_ex_under"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_bmi_normal"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="40dp"
+            android:elevation="5dp"
+            android:src="@drawable/rectangle_bmi_normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_bmi_under"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Extremely Under"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/iv_bmi_ex_under"
+            app:layout_constraintEnd_toEndOf="@id/iv_bmi_ex_under"
+            app:layout_constraintTop_toBottomOf="@+id/iv_bmi_ex_under" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Underweight"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/iv_bmi_under"
+            app:layout_constraintEnd_toEndOf="@id/iv_bmi_under"
+            app:layout_constraintTop_toBottomOf="@+id/iv_bmi_under" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Normal"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/iv_bmi_normal"
+            app:layout_constraintEnd_toEndOf="@id/iv_bmi_normal"
+            app:layout_constraintTop_toBottomOf="@+id/iv_bmi_normal" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="26dp"
+            android:fadingEdgeLength="10dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_bmi_over"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="26dp"
+                android:src="@drawable/rectangle_bmi_overweight"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/iv_bmi_obesity"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="85dp"
+                android:layout_marginTop="26dp"
+                android:elevation="5dp"
+                android:src="@drawable/rectangle_bmi_obesity"
+                app:layout_constraintStart_toEndOf="@id/iv_bmi_over"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_bmi_ex_obesity"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="85dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginEnd="40dp"
+                android:elevation="5dp"
+                android:src="@drawable/rectangle_bmi_extreme_obesity"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_bmi_obesity"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Overweight"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/iv_bmi_over"
+                app:layout_constraintEnd_toEndOf="@id/iv_bmi_over"
+                app:layout_constraintTop_toBottomOf="@+id/iv_bmi_over" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Obesity"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/iv_bmi_obesity"
+                app:layout_constraintEnd_toEndOf="@id/iv_bmi_obesity"
+                app:layout_constraintTop_toBottomOf="@+id/iv_bmi_obesity" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Extreme Obesity"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/iv_bmi_ex_obesity"
+                app:layout_constraintEnd_toEndOf="@id/iv_bmi_ex_obesity"
+                app:layout_constraintTop_toBottomOf="@+id/iv_bmi_ex_obesity" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

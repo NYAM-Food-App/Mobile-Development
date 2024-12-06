@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -63,4 +64,16 @@ dependencies {
     implementation(libs.androidx.camera.view)
     implementation(libs.androidx.camera.camera2)
     implementation(libs.androidx.camera.lifecycle)
+
+    //retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit2.converter.gson)
+    implementation(libs.logging.interceptor)
+
+
+    //Room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
 }
