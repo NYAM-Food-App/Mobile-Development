@@ -12,12 +12,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.nyam.R
+import com.example.nyam.data.ResultState
 import com.example.nyam.databinding.FragmentCameraBinding
 import com.example.nyam.helper.ViewModelFactory
+import com.example.nyam.helper.reduceFileImage
+import com.example.nyam.helper.uriToFile
 import com.example.nyam.view.camera.CameraXActivity.Companion.CAMERAX_RESULT
 
 class CameraFragment : Fragment() {
@@ -71,12 +77,9 @@ class CameraFragment : Fragment() {
     }
 
     private fun startSearch() {
-        TODO("Not yet implemented")
+        uploadImage()
     }
 
-    private fun setBorder(){
-        binding.ivPhoto.width
-    }
 
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
@@ -112,6 +115,41 @@ class CameraFragment : Fragment() {
         }
     }
 
+
+    private fun uploadImage() {
+        currentImageUri?.let { uri ->
+            val imageFile = uriToFile(uri, requireContext()).reduceFileImage()
+            Log.d("Image File", "showImage: ${imageFile.path}")
+            val loadingDialog = AlertDialog.Builder(requireContext()).setView(R.layout.dialog_builder).create()
+
+            viewModel.uploadImage(imageFile).observe(viewLifecycleOwner) { result ->
+                if (result != null) {
+                    when (result) {
+                        is ResultState.Loading -> {
+                            loadingDialog.show()
+                        }
+
+                        is ResultState.Success -> {
+                            //TODO: Direct to Recommendation
+                            showToast(result.data.message)
+                            loadingDialog.dismiss()
+                            binding.btnSearch.text = result.data.foodPrediction.predictedClass
+                        }
+
+                        is ResultState.Error -> {
+                            showToast(result.error)
+                            loadingDialog.dismiss()
+                        }
+                    }
+                }
+            }
+
+        } ?:showToast(getString(R.string.empty_image))
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
     companion object {
         const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }

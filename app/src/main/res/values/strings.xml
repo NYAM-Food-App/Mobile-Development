@@ -62,4 +62,5 @@
     <string name="food_placeholder">Nasi Goreng</string>
     <string name="calories_placeholder">633</string>
     <string name="calories">calories</string>
+    <string name="empty_image">Tidak ada gambar</string>
 </resources>
