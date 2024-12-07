@@ -7,14 +7,15 @@
     android:layout_height="wrap_content"
     android:elevation="10dp"
     android:layout_gravity="center"
-    android:layout_margin="28dp"
+    android:layout_marginVertical="8dp"
+    android:layout_marginHorizontal="28dp"
     app:cardCornerRadius="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <ImageView
             android:id="@+id/iv_food_photo"
             android:layout_width="100dp"
             android:layout_height="64dp"

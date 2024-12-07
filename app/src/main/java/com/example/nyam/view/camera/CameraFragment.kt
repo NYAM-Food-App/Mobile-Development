@@ -130,10 +130,9 @@ class CameraFragment : Fragment() {
                         }
 
                         is ResultState.Success -> {
-                            //TODO: Direct to Recommendation
-                            showToast(result.data.message)
+                            showToast("${result.data.message} : ${result.data.foodPrediction.predictedClass}")
                             loadingDialog.dismiss()
-                            binding.btnSearch.text = result.data.foodPrediction.predictedClass
+                            findNavController().navigate(R.id.action_navigation_camera_to_recommendActivity)
                         }
 
                         is ResultState.Error -> {

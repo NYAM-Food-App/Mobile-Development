@@ -24,7 +24,6 @@ class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
-        enableEdgeToEdge()
         _binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

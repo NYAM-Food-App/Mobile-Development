@@ -52,6 +52,6 @@ fun createCustomTempFile(context: Context): File {
 }
 
 fun getPercent(fulfilled : Double, daily : Int):String{
-    val myFormat = DecimalFormat("#.00")
+    val myFormat = DecimalFormat("#")
     return myFormat.format(fulfilled / daily * 100)+"%"
 }

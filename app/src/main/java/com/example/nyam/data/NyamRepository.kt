@@ -1,10 +1,15 @@
 package com.example.nyam.data
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.lifecycle.map
+import com.example.nyam.data.local.dao.RecipesDao
+import com.example.nyam.data.local.entity.RecipesEntity
 import com.example.nyam.data.pref.UserModel
 import com.example.nyam.data.pref.UserPreference
 import com.example.nyam.data.remote.response.AnalyzeResponse
+import com.example.nyam.data.remote.response.RecipesItem
 import com.example.nyam.data.remote.response.UserData
 import com.example.nyam.data.remote.retrofit.ApiService
 import com.google.gson.Gson
@@ -17,56 +22,86 @@ import java.io.File
 
 class NyamRepository private constructor(
     private val userPreference: UserPreference,
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val recipesDao: RecipesDao
+
 ) {
 
     suspend fun getUser(): UserData {
         return apiService.getUser()
     }
 
-    fun uploadImage(imageFile:File)= liveData{
+    fun getRecipes(): LiveData<ResultState<List<RecipesEntity>>> = liveData {
         emit(ResultState.Loading)
-
-        val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
-        val multipartBody = MultipartBody.Part.createFormData(
-            "file",
-            imageFile.name,
-            requestImageFile
-        )
         try {
-            val successResponse = apiService.uploadImage(multipartBody)
-            emit(ResultState.Success(successResponse))
-        } catch (e: HttpException) {
-            val errorBody = e.response()?.errorBody()?.string()
-            Log.d("REPOSITORY WOIIIIIIIIII", "uploadImage: $errorBody")
-            val errorResponse = Gson().fromJson(errorBody, AnalyzeResponse::class.java)
-            emit(ResultState.Error(errorBody.toString()))
-        }catch (e:Exception){
+            val localData: LiveData<ResultState<List<RecipesEntity>>> =
+                recipesDao.getRecipes().map { ResultState.Success(it) }
+            emitSource(localData)
+        } catch (e: Exception) {
             emit(ResultState.Error(e.message.toString()))
         }
-
     }
 
-    suspend fun saveSession(user: UserModel) {
-        userPreference.saveSession(user)
+fun uploadImage(imageFile: File) = liveData {
+    emit(ResultState.Loading)
+    val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+    val multipartBody = MultipartBody.Part.createFormData(
+        "file",
+        imageFile.name,
+        requestImageFile
+    )
+    try {
+        val successResponse = apiService.uploadImage(multipartBody)
+        val recipesList = successResponse.recipes.map { recipe ->
+            RecipesEntity(
+                image = recipe.image,
+                foodname = recipe.foodname,
+                dishType = recipe.dishType.toString(),
+                mealType = recipe.mealType.toString(),
+                howToCook = recipe.howToCook,
+                ingredients = recipe.ingredients.toString(),
+                sourceRecipes = recipe.sourceRecipes,
+                cuisineType = recipe.cuisineType.toString(),
+                calories = recipe.fulfilledNeeds.calories.toString(),
+                fat = recipe.fulfilledNeeds.fat.toString(),
+                carbs = recipe.fulfilledNeeds.carbs.toString(),
+                protein = recipe.fulfilledNeeds.protein.toString()
+            )
+        }
+        recipesDao.deleteAllRecipes()
+        recipesDao.insertRecipes(recipesList)
+        emit(ResultState.Success(successResponse))
+    } catch (e: HttpException) {
+        val errorBody = e.response()?.errorBody()?.string()
+        Log.d("REPOSITORY WOIIIIIIIIII", "uploadImage: $errorBody")
+        val errorResponse = Gson().fromJson(errorBody, AnalyzeResponse::class.java)
+        emit(ResultState.Error(errorBody.toString()))
+    } catch (e: Exception) {
+        emit(ResultState.Error(e.message.toString()))
     }
+}
 
-    fun getSession(): Flow<UserModel> {
-        return userPreference.getSession()
-    }
+suspend fun saveSession(user: UserModel) {
+    userPreference.saveSession(user)
+}
 
-    suspend fun logout() {
-        userPreference.logout()
-    }
+fun getSession(): Flow<UserModel> {
+    return userPreference.getSession()
+}
 
-    companion object {
-        @Volatile
-        private var instance: NyamRepository? = null
-        fun getInstance(
-            userPreference: UserPreference,
-            apiService: ApiService
-        ): NyamRepository = instance ?: synchronized(this) {
-            instance ?: NyamRepository(userPreference,apiService)
-        }.also { instance = it }
-    }
+suspend fun logout() {
+    userPreference.logout()
+}
+
+companion object {
+    @Volatile
+    private var instance: NyamRepository? = null
+    fun getInstance(
+        userPreference: UserPreference,
+        apiService: ApiService,
+        recipesDao: RecipesDao
+    ): NyamRepository = instance ?: synchronized(this) {
+        instance ?: NyamRepository(userPreference, apiService, recipesDao)
+    }.also { instance = it }
+}
 }

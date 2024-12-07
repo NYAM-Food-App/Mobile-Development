@@ -16,15 +16,15 @@ class customDropDialog @JvmOverloads constructor(
 ) : AppCompatTextView(context, attrs) {
 
 
-    var ListAllergy: ArrayList<Int> = ArrayList()
-    var ArrayAllergy: Array<String> = resources.getStringArray(R.array.allergies)
+    private var listAllergy: ArrayList<Int> = ArrayList()
+    var arrayAllergy: Array<String> = resources.getStringArray(R.array.allergies)
 
     private var arrowDown: Drawable = ContextCompat.getDrawable(context, R.drawable.ic_arrow_down) as Drawable
 
     init {
 
         setButtonDrawables()
-        val selectedAllergy: BooleanArray = ArrayAllergy.map { false }.toBooleanArray()
+        val selectedAllergy: BooleanArray = arrayAllergy.map { false }.toBooleanArray()
 
         setOnClickListener { // Initialize alert dialog
             val builder: AlertDialog.Builder = AlertDialog.Builder(context)
@@ -36,32 +36,32 @@ class customDropDialog @JvmOverloads constructor(
             builder.setCancelable(false)
 
             builder.setMultiChoiceItems(
-                ArrayAllergy, selectedAllergy
-            ) { dialogInterface, position, checked ->
+                arrayAllergy, selectedAllergy
+            ) { _, position, checked ->
                 // check condition
                 if (checked) {
                     // when checkbox selected
                     // Add position  in lang list
-                    ListAllergy.add(position)
+                    listAllergy.add(position)
                     // Sort array list
-                    ListAllergy.sort()
+                    listAllergy.sort()
                 } else {
                     // when checkbox unselected
                     // Remove position from langList
-                    ListAllergy.remove(position)
+                    listAllergy.remove(position)
                 }
             }
 
             builder.setPositiveButton(
                 "OK"
-            ) { dialogInterface, i -> // Initialize string builder
+            ) { _, _ -> // Initialize string builder
                 val stringBuilder = StringBuilder()
                 // use for loop
-                for (j in ListAllergy.indices) {
+                for (j in listAllergy.indices) {
                     // concat array value
-                    stringBuilder.append(ArrayAllergy[ListAllergy[j]])
+                    stringBuilder.append(arrayAllergy[listAllergy[j]])
                     // check condition
-                    if (j != ListAllergy.size - 1) {
+                    if (j != listAllergy.size - 1) {
                         // When j value  not equal
                         // to lang list size - 1
                         // add comma
@@ -76,18 +76,18 @@ class customDropDialog @JvmOverloads constructor(
 
             builder.setNegativeButton(
                 "Cancel"
-            ) { dialogInterface, i -> // dismiss dialog
+            ) { dialogInterface, _ -> // dismiss dialog
                 dialogInterface.dismiss()
             }
             builder.setNeutralButton(
                 "Clear All"
-            ) { dialogInterface, i ->
+            ) { _, _ ->
                 // use for loop
                 for (j in selectedAllergy.indices) {
                     // remove all selection
                     selectedAllergy[j] = false
                     // clear language list
-                    ListAllergy.clear()
+                    listAllergy.clear()
                     // clear text view value
                     text = ""
                 }

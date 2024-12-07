@@ -1,6 +1,7 @@
 package com.example.nyam.view.home
 
 import android.content.res.ColorStateList
+import android.icu.text.DecimalFormat
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +21,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var colorList:List<ColorStateList?>
+    private lateinit var colorList: List<ColorStateList?>
 
     private val viewModel by viewModels<HomeViewModel> {
         ViewModelFactory.getInstance(
@@ -39,18 +40,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Tes ProgressBar onClick aja, bisa dihapus
-        binding.cardDailyReport.progressBarCalories.setOnClickListener {
-            binding.cardDailyReport.progressBarCalories.progress += 10
-        }
-
         colorList = listOf(
-            ContextCompat.getColorStateList(requireContext(),R.color.extreme_under),
-            ContextCompat.getColorStateList(requireContext(),R.color.under),
-            ContextCompat.getColorStateList(requireContext(),R.color.normal),
-            ContextCompat.getColorStateList(requireContext(),R.color.overweight),
-            ContextCompat.getColorStateList(requireContext(),R.color.obesity),
-            ContextCompat.getColorStateList(requireContext(),R.color.extreme_obesity)
+            ContextCompat.getColorStateList(requireContext(), R.color.extreme_under),
+            ContextCompat.getColorStateList(requireContext(), R.color.under),
+            ContextCompat.getColorStateList(requireContext(), R.color.normal),
+            ContextCompat.getColorStateList(requireContext(), R.color.overweight),
+            ContextCompat.getColorStateList(requireContext(), R.color.obesity),
+            ContextCompat.getColorStateList(requireContext(), R.color.extreme_obesity)
         )
 
         viewModel.getUser()
@@ -69,20 +65,21 @@ class HomeFragment : Fragment() {
                     binding.tvBmi.text = "BMI Selesai"
 
                     with(result.data) {
-                        val cal = "${fulfilledNeeds.calories}/${dailyNeeds.calories}"
-                        val calPercent = getPercent(fulfilledNeeds.calories as Double,dailyNeeds.calories)
+                        val myFormat = DecimalFormat("#")
+                        val cal = myFormat.format(fulfilledNeeds.calories as Double) + "/${dailyNeeds.calories}"
+                        val calPercent = getPercent(fulfilledNeeds.calories, dailyNeeds.calories)
                         val calProgress = (fulfilledNeeds.calories / dailyNeeds.calories * 100).toInt()
 
-                        val fat = "${fulfilledNeeds.fat}/${dailyNeeds.fat}"
-                        val fatPercent = getPercent(fulfilledNeeds.fat as Double,dailyNeeds.fat)
+                        val fat = myFormat.format(fulfilledNeeds.fat as Double) + "/${dailyNeeds.fat}"
+                        val fatPercent = getPercent(fulfilledNeeds.fat, dailyNeeds.fat)
                         val fatProgress = (fulfilledNeeds.fat / dailyNeeds.fat * 100).toInt()
 
-                        val carbs = "${fulfilledNeeds.carbs}/${dailyNeeds.carbs}"
-                        val carbsPercent = getPercent(fulfilledNeeds.carbs as Double,dailyNeeds.carbs)
+                        val carbs = myFormat.format(fulfilledNeeds.carbs as Double) + "/${dailyNeeds.carbs}"
+                        val carbsPercent = getPercent(fulfilledNeeds.carbs, dailyNeeds.carbs)
                         val carbsProgress = (fulfilledNeeds.carbs / dailyNeeds.carbs * 100).toInt()
 
-                        val protein = "${fulfilledNeeds.protein}/${dailyNeeds.protein}"
-                        val proteinPercent = getPercent(fulfilledNeeds.protein as Double,dailyNeeds.protein)
+                        val protein = myFormat.format(fulfilledNeeds.protein as Double) + "/${dailyNeeds.protein}"
+                        val proteinPercent = getPercent(fulfilledNeeds.protein, dailyNeeds.protein)
                         val proteinProgress = (fulfilledNeeds.protein / dailyNeeds.protein * 100).toInt()
 
 
@@ -90,7 +87,7 @@ class HomeFragment : Fragment() {
                             valuesCalories.text = cal
                             percentCalories.text = calPercent
                             progressBarCalories.progress = calProgress
-
+//
                             valuesFat.text = fat
                             percentFat.text = fatPercent
                             progressBarFat.progress = fatProgress
@@ -104,7 +101,7 @@ class HomeFragment : Fragment() {
                             progressBarProtein.progress = proteinProgress
                         }
 
-                        with(binding.cardBmi){
+                        with(binding.cardBmi) {
                             valuesHeight.text = height.toString()
                             valuesWeight.text = weight.toString()
                             valuesBmi.text = String.format((bmi).toString())
@@ -113,6 +110,7 @@ class HomeFragment : Fragment() {
                         }
                     }
                 }
+
                 is ResultState.Error -> {
                     Toast.makeText(requireContext(), "gagal", Toast.LENGTH_SHORT).show()
                 }

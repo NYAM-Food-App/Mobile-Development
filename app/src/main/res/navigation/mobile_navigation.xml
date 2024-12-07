@@ -9,7 +9,11 @@
         android:id="@+id/navigation_camera"
         android:name="com.example.nyam.view.camera.CameraFragment"
         android:label="@string/title_camera"
-        tools:layout="@layout/fragment_camera" />
+        tools:layout="@layout/fragment_camera" >
+        <action
+            android:id="@+id/action_navigation_camera_to_recommendActivity"
+            app:destination="@id/recommendActivity" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_history"
         android:name="com.example.nyam.view.history.HistoryFragment"
@@ -20,4 +24,9 @@
         android:name="com.example.nyam.view.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
+    <activity
+        android:id="@+id/recommendActivity"
+        android:name="com.example.nyam.view.recommended.RecommendActivity"
+        android:label="activity_recommend"
+        tools:layout="@layout/activity_recommend" />
 </navigation>
