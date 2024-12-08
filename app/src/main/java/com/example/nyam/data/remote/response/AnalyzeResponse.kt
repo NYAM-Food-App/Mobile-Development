@@ -36,7 +36,7 @@ data class RecipesItem(
 	val foodname: String,
 
 	@field:SerializedName("dishType")
-	val dishType: List<String>,
+	val dishType: List<String>?= null,
 
 	@field:SerializedName("mealType")
 	val mealType: List<String>,

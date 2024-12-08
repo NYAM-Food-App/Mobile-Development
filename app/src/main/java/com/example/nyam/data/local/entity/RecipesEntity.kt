@@ -2,31 +2,31 @@ package com.example.nyam.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.nyam.data.remote.response.FulfilledNeeds
 
 @Entity(tableName = "recipes")
 class RecipesEntity(
-        @PrimaryKey(autoGenerate = true)
-        val index:Int = 0,
 
-        val image: String,
+    val image: String,
 
-        val foodname: String,
+    @PrimaryKey
+    val id : Int,
 
-        val dishType: String,
+    val foodname: String,
 
-        val mealType: String,
+    val dishType: String? = null,
 
-        val howToCook: String,
+    val mealType: String,
 
-        val ingredients: String,
+    val howToCook: String,
 
-        val sourceRecipes: String,
+    val ingredients: String,
 
-        val cuisineType: String,
+    val sourceRecipes: String,
 
-        val calories: String,
-        val fat : String,
-        val carbs : String,
-        val protein : String,
+    val cuisineType: String,
+
+    val calories: Double,
+    val fat: Double,
+    val carbs: Double,
+    val protein: Double,
 )

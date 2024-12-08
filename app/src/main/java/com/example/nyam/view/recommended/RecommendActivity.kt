@@ -25,8 +25,8 @@ class RecommendActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityRecommendBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide()
         enableEdgeToEdge()
+        setActionBar()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -36,7 +36,11 @@ class RecommendActivity : AppCompatActivity() {
         binding.rvFood.layoutManager = LinearLayoutManager(this)
         observeViewModel()
     }
-
+    private fun setActionBar() {
+        supportActionBar?.setCustomView(R.layout.app_bar)
+        supportActionBar?.setDisplayShowCustomEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
     private fun observeViewModel() {
         viewModel.getRecipes().observe(this) { result ->
             if (result != null) {

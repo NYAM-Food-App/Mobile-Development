@@ -9,6 +9,9 @@ import com.example.nyam.data.local.entity.RecipesEntity
 import com.example.nyam.data.pref.UserModel
 import com.example.nyam.data.pref.UserPreference
 import com.example.nyam.data.remote.response.AnalyzeResponse
+import com.example.nyam.data.remote.response.FoodHistoryItem
+import com.example.nyam.data.remote.response.PostBody
+import com.example.nyam.data.remote.response.PostResponse
 import com.example.nyam.data.remote.response.RecipesItem
 import com.example.nyam.data.remote.response.UserData
 import com.example.nyam.data.remote.retrofit.ApiService
@@ -31,6 +34,18 @@ class NyamRepository private constructor(
         return apiService.getUser()
     }
 
+    fun chooseFood(id: String, index: Int) : LiveData<ResultState<PostResponse>> = liveData {
+        emit(ResultState.Loading)
+        try {
+            val response = apiService.chooseFood(id, PostBody(index))
+            emit(ResultState.Success(response))
+        }catch ( e: HttpException){
+            emit(ResultState.Error(e.message.toString()))
+        }
+    }
+
+    fun getDetailRecipes(id: Int) = recipesDao.getDetailRecipes(id)
+
     fun getRecipes(): LiveData<ResultState<List<RecipesEntity>>> = liveData {
         emit(ResultState.Loading)
         try {
@@ -52,8 +67,11 @@ fun uploadImage(imageFile: File) = liveData {
     )
     try {
         val successResponse = apiService.uploadImage(multipartBody)
+        var id = 0
         val recipesList = successResponse.recipes.map { recipe ->
+
             RecipesEntity(
+                id = id++,
                 image = recipe.image,
                 foodname = recipe.foodname,
                 dishType = recipe.dishType.toString(),
@@ -62,10 +80,10 @@ fun uploadImage(imageFile: File) = liveData {
                 ingredients = recipe.ingredients.toString(),
                 sourceRecipes = recipe.sourceRecipes,
                 cuisineType = recipe.cuisineType.toString(),
-                calories = recipe.fulfilledNeeds.calories.toString(),
-                fat = recipe.fulfilledNeeds.fat.toString(),
-                carbs = recipe.fulfilledNeeds.carbs.toString(),
-                protein = recipe.fulfilledNeeds.protein.toString()
+                calories = recipe.fulfilledNeeds.calories as Double,
+                fat = recipe.fulfilledNeeds.fat as Double,
+                carbs = recipe.fulfilledNeeds.carbs as Double,
+                protein = recipe.fulfilledNeeds.protein as Double
             )
         }
         recipesDao.deleteAllRecipes()
@@ -74,9 +92,9 @@ fun uploadImage(imageFile: File) = liveData {
     } catch (e: HttpException) {
         val errorBody = e.response()?.errorBody()?.string()
         Log.d("REPOSITORY WOIIIIIIIIII", "uploadImage: $errorBody")
-        val errorResponse = Gson().fromJson(errorBody, AnalyzeResponse::class.java)
+//        val errorResponse = Gson().fromJson(errorBody, AnalyzeResponse::class.java)
         emit(ResultState.Error(errorBody.toString()))
-    } catch (e: Exception) {
+    }catch (e:Exception){
         emit(ResultState.Error(e.message.toString()))
     }
 }

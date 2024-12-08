@@ -10,11 +10,13 @@ import com.example.nyam.data.local.entity.RecipesEntity
 @Dao
 interface RecipesDao {
 
-    @Query("SELECT * FROM recipes ORDER BY `index` DESC")
+    @Query("SELECT * FROM recipes ORDER BY id DESC")
     fun getRecipes(): LiveData<List<RecipesEntity>>
 
+    @Query("SELECT * FROM recipes WHERE id =:id ORDER  BY `id` DESC")
+    fun getDetailRecipes(id: Int): LiveData<RecipesEntity>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRecipes(recipes: List<RecipesEntity>)
 
 

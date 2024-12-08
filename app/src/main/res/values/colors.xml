@@ -6,6 +6,7 @@
     <color name="main_color">#5EB063</color>
     <color name="main_color_33">#335EB063</color>
     <color name="secondary_color">#91D092</color>
+    <color name="secondary_color_23">#8891D092</color>
 
     <color name="grey">#6C7278</color>
     <color name="transparent">#0000</color>
@@ -17,4 +18,5 @@
     <color name="obesity">#F69999</color>
     <color name="extreme_obesity">#F86F6F</color>
     <color name="white_99">#99FFFFFF</color>
+    <color name="protein">#C0ADE9</color>
 </resources>

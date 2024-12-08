@@ -1,6 +1,8 @@
 package com.example.nyam.adapter
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.icu.text.DecimalFormat
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -11,6 +13,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.nyam.R
 import com.example.nyam.data.local.entity.RecipesEntity
 import com.example.nyam.databinding.CardFoodBinding
+import com.example.nyam.view.detail.FoodDetailActivity
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -27,7 +30,8 @@ class RecipesAdapter :
                     RequestOptions.placeholderOf(R.drawable.ic_loading)
                         .error(R.drawable.ic_error)
                 ).into(ivFoodPhoto)
-                tvCalories.text = recipes.calories
+                val myFormat = DecimalFormat("#")
+                tvCalories.text = myFormat.format(recipes.calories)
 
                 itemView.setOnClickListener {
                     //TODO:Consider Animation
@@ -39,8 +43,9 @@ class RecipesAdapter :
 //                            Pair(ivItemPhoto, "photo"),
 //                            Pair(tvCreatedAt,"time")
 //                        )
-//                    val intent = Intent(itemView.context, DetailActivity::class.java)
-//                    intent.putExtra(DetailActivity.STORY_ID, story.id)
+                    val intent = Intent(itemView.context, FoodDetailActivity::class.java)
+                    intent.putExtra(FoodDetailActivity.FOOD_ID, recipes.id)
+                    itemView.context.startActivity(intent)
 //                    itemView.context.startActivity(intent,optionsCompat.toBundle())
 
                 }
@@ -76,7 +81,7 @@ class RecipesAdapter :
                 override fun areItemsTheSame(
                     oldItem: RecipesEntity, newItem: RecipesEntity
                 ): Boolean {
-                    return oldItem.index == newItem.index
+                    return oldItem.id == newItem.id
                 }
 
                 @SuppressLint("DiffUtilEquals")
