@@ -1,4 +1,4 @@
-package com.example.nyam.view.login
+package com.example.nyam.view.personal
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,6 @@ import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
@@ -16,10 +14,10 @@ import androidx.credentials.exceptions.GetCredentialException
 import androidx.lifecycle.lifecycleScope
 import com.example.nyam.MainActivity
 import com.example.nyam.R
-import com.example.nyam.databinding.ActivityLoginBinding
+import com.example.nyam.data.remote.response.RegisterBody
+import com.example.nyam.databinding.ActivityRegisterDataBinding
 import com.example.nyam.helper.ViewModelFactory
 import com.example.nyam.view.MainViewModel
-import com.example.nyam.view.personal.RegisterDataActivity
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
@@ -31,13 +29,12 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 
-class LoginActivity : AppCompatActivity() {
+class RegisterDataActivity : AppCompatActivity() {
 
-    private var _binding: ActivityLoginBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var _binding: ActivityRegisterDataBinding
+    private val binding get() = _binding
 
     private lateinit var auth: FirebaseAuth
-
 
     private val viewModel by viewModels<MainViewModel> {
         ViewModelFactory.getInstance(this)
@@ -45,37 +42,25 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityLoginBinding.inflate(layoutInflater)
         enableEdgeToEdge()
+        supportActionBar?.hide()
+        _binding = ActivityRegisterDataBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
         auth = Firebase.auth
 
-        supportActionBar?.hide()
+        binding.btnRegister.setOnClickListener {
+            register()
+        }
 
-        binding.Signin.setOnClickListener {
-            signIn()
-        }
-        binding.loginToRegister.setOnClickListener {
-            goToRegister()
-        }
     }
 
-    private fun goToRegister(){
-        val intent = Intent(baseContext, RegisterDataActivity::class.java)
-        startActivity(intent)
-    }
 
-    private fun signIn() {
+    private fun register() {
         val credentialManager =
             CredentialManager.create(this) //import from androidx.CredentialManager
 
         val googleIdOption = GetGoogleIdOption.Builder()
-            .setFilterByAuthorizedAccounts(true)
+            .setFilterByAuthorizedAccounts(false)
             .setServerClientId(getString(R.string.your_web_client_id)) //from https://console.firebase.google.com/project/firebaseProjectName/authentication/providers
             .build()
 
@@ -84,20 +69,17 @@ class LoginActivity : AppCompatActivity() {
             .addCredentialOption(googleIdOption)
             .build()
 
-        Log.d(TAG, "signIn: Request: $request")
-
         lifecycleScope.launch {
 
             try {
                 val result: GetCredentialResponse = credentialManager.getCredential(
                     //import from androidx.CredentialManager
                     request = request,
-                    context = this@LoginActivity,
+                    context = this@RegisterDataActivity,
                 )
                 handleSignIn(result)
             } catch (e: GetCredentialException) { //import from androidx.CredentialManager
                 Log.d("Error", e.message.toString())
-                goToRegister()
             }
         }
     }
@@ -129,7 +111,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential: AuthCredential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
@@ -139,9 +120,24 @@ class LoginActivity : AppCompatActivity() {
                     Log.d(TAG, "signInWithCredential:success")
                     val user: FirebaseUser? = auth.currentUser
 
-                    if (user != null) {
-                        viewModel.getUser(user.uid)
+                    with(binding){
+                        val fullName = etName.text.toString()
+                        val gender = spinGender.selectedItemPosition
+                        val allergy = spinAllergy.selectedAlergy
+                        val height = etHeight.text.toString()
+                        val weight = etWeight.text.toString()
                     }
+                    viewModel.registerUser(
+                        RegisterBody(
+                            uid = user?.uid.toString(),
+                            fullname = TODO(),
+                            birthdate = TODO(),
+                            gender = TODO(),
+                            allergy = TODO(),
+                            height = TODO(),
+                            weight = TODO(),
+                        )
+                    )
 
                     updateUI(user)
                 } else {
@@ -160,8 +156,7 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
     }
-
     companion object {
-        private const val TAG = "LoginActivity"
+        private const val TAG = "RegisterActivity"
     }
 }

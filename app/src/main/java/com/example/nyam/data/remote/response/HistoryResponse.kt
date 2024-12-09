@@ -19,6 +19,10 @@ data class PostResponse(
 	val selectedFood: SelectedFood? = null
 )
 
-data class PostBody(
+data class ChosenFood(
 	val selectedIndex : Int
 )
+
+
+
+

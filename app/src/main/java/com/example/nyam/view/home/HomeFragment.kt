@@ -34,6 +34,10 @@ class HomeFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        viewModel.getUser("W82AJqbULgU2nQg1mRUXrfFXVEu1")
+        observeViewModel()
+
         return binding.root
     }
 
@@ -49,8 +53,6 @@ class HomeFragment : Fragment() {
             ContextCompat.getColorStateList(requireContext(), R.color.extreme_obesity)
         )
 
-        viewModel.getUser()
-        observeViewModel()
 
     }
 

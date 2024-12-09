@@ -1,8 +1,10 @@
 package com.example.nyam.data.remote.retrofit
 
 import com.example.nyam.data.remote.response.AnalyzeResponse
-import com.example.nyam.data.remote.response.PostBody
+import com.example.nyam.data.remote.response.HistoryResponse
+import com.example.nyam.data.remote.response.ChosenFood
 import com.example.nyam.data.remote.response.PostResponse
+import com.example.nyam.data.remote.response.RegisterBody
 import com.example.nyam.data.remote.response.UserData
 import okhttp3.MultipartBody
 import retrofit2.http.Body
@@ -33,7 +35,16 @@ interface ApiService {
     @POST("choose/food/{id}")
     suspend fun chooseFood(
         @Path("id") id: String = "W82AJqbULgU2nQg1mRUXrfFXVEu1",
-        @Body selectedIndex: PostBody
+        @Body selectedIndex: ChosenFood
     ): PostResponse
 
+    @GET("history/food/{id}")
+    suspend fun getHistory(
+        @Path("id") id: String = "W82AJqbULgU2nQg1mRUXrfFXVEu1"
+    ): HistoryResponse
+
+    @POST("auth/register")
+    suspend fun registerUser(
+        @Body userData: RegisterBody
+    ): PostResponse
 }

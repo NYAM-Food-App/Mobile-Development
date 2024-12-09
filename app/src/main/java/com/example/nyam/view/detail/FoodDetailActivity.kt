@@ -17,6 +17,7 @@ import com.example.nyam.R
 import com.example.nyam.data.ResultState
 import com.example.nyam.databinding.ActivityFoodDetailBinding
 import com.example.nyam.helper.ViewModelFactory
+import com.example.nyam.view.result.ResultActivity
 
 class FoodDetailActivity : AppCompatActivity() {
     private lateinit var _binding: ActivityFoodDetailBinding
@@ -47,8 +48,8 @@ class FoodDetailActivity : AppCompatActivity() {
                     is ResultState.Success -> {
                         loadingDialog.dismiss()
                         Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this    ,MainActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        val intent = Intent(this    ,ResultActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_TASK_ON_HOME or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(intent)
                     }
                     is ResultState.Error -> {

@@ -53,7 +53,7 @@ data class UserData(
 data class FoodHistoryItem(
 
 	@field:SerializedName("imageUrl")
-	val imageUrl: String? = null,
+	val imageUrl: String,
 
 	@field:SerializedName("selectedFood")
 	val selectedFood: SelectedFood? = null,
@@ -130,3 +130,27 @@ data class Timestamp(
 	@field:SerializedName("_seconds")
 	val seconds: Int? = null
 )
+
+data class RegisterBody(
+	@field:SerializedName("uid")
+	val uid: String,
+
+	@field:SerializedName("fullname")
+	val fullname: String,
+	@field:SerializedName("birthdate")
+	val birthdate: String,
+
+	@field:SerializedName("gender")
+	val gender: Int,
+
+	@field:SerializedName("allergy")
+	val allergy: List<String>,
+
+	@field:SerializedName("height")
+	val height: Int,
+
+	@field:SerializedName("weight")
+	val weight: Int
+
+)
+

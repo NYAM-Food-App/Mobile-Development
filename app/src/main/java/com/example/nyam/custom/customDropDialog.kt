@@ -18,6 +18,7 @@ class customDropDialog @JvmOverloads constructor(
 
     private var listAllergy: ArrayList<Int> = ArrayList()
     var arrayAllergy: Array<String> = resources.getStringArray(R.array.allergies)
+    var selectedAlergy :List<String> = listOf()
 
     private var arrowDown: Drawable = ContextCompat.getDrawable(context, R.drawable.ic_arrow_down) as Drawable
 
@@ -70,6 +71,8 @@ class customDropDialog @JvmOverloads constructor(
                 }
                 // set text on textView
                 text = stringBuilder.toString()
+                selectedAlergy = arrayAllergy.toList()
+
 //                // set text on textView
 //                textView.setText(stringBuilder.toString())
             }

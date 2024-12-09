@@ -16,15 +16,11 @@ class HomeViewModel(private val repository: NyamRepository) : ViewModel() {
     private val _loginResult = MutableLiveData<ResultState<UserData>>()
     val loginResult = _loginResult
 
-    init {
-        getUser()
-    }
-
-    fun getUser(){
+    fun getUser(id:String){
         viewModelScope.launch {
             try {
                 _loginResult.value = ResultState.Loading
-                val response = repository.getUser()
+                val response = repository.getUser(id)
                 _loginResult.value = ResultState.Success(response)
             }
             catch (e: HttpException) {

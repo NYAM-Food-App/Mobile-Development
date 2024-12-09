@@ -36,7 +36,7 @@
             android:name=".view.login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".view.personal.PersonalDataActivity"
+            android:name=".view.personal.RegisterDataActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

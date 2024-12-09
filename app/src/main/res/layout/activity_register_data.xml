@@ -2,10 +2,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/main"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.personal.PersonalDataActivity">
+    tools:context=".view.personal.RegisterDataActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -46,8 +46,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/please_fill_your_personal_data"
                 android:fontFamily="@font/inter_medium"
+                android:text="@string/please_fill_your_personal_data"
                 android:textColor="@color/grey"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -66,8 +66,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Name"
                 android:fontFamily="@font/inter_medium"
+                android:text="Name"
                 android:textColor="@color/grey"
                 android:textSize="12sp" />
 
@@ -76,16 +76,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_outline"
-                android:hint="Fill your name"
                 android:fontFamily="@font/poppins_medium"
+                android:hint="Fill your name"
                 android:padding="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Gender"
                 android:fontFamily="@font/inter_medium"
+                android:text="Gender"
                 android:textColor="@color/grey"
                 android:textSize="12sp" />
 
@@ -101,27 +101,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Age"
                 android:fontFamily="@font/inter_medium"
+                android:text="Age"
                 android:textColor="@color/grey"
                 android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/et_age"
-                android:background="@drawable/button_outline"
-                android:padding="10dp"
-                android:hint="Fill your age"
-                android:fontFamily="@font/poppins_medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number|numberDecimal" />
+                android:background="@drawable/button_outline"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="Fill your age"
+                android:inputType="number|numberDecimal"
+                android:padding="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Allergy"
                 android:fontFamily="@font/inter_medium"
+                android:text="Allergy"
                 android:textColor="@color/grey"
                 android:textSize="12sp" />
 
@@ -131,9 +131,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_outline"
                 android:entries="@array/allergies"
-                android:padding="10dp"
-                android:hint="Allergies"
                 android:fontFamily="@font/poppins_medium"
+                android:hint="Allergies"
+                android:padding="10dp"
                 android:spinnerMode="dialog" />
 
             <LinearLayout
@@ -150,21 +150,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="Weight(kg)"
                         android:fontFamily="@font/inter_medium"
+                        android:text="Weight(kg)"
                         android:textColor="@color/grey"
                         android:textSize="12sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
-                        android:background="@drawable/button_outline"
-                        android:padding="10dp"
-                        android:hint="Weight"
-                        android:fontFamily="@font/poppins_medium"
                         android:id="@+id/et_weight"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/button_outline"
+                        android:fontFamily="@font/poppins_medium"
+                        android:hint="Weight"
+                        android:padding="10dp"
                         app:layout_constraintRight_toLeftOf="@+id/et_height"
 
                         app:layout_constraintStart_toStartOf="parent"
@@ -177,8 +177,8 @@
                         android:layout_marginStart="120dp"
 
                         android:layout_marginTop="16dp"
-                        android:text="Height(cm)"
                         android:fontFamily="@font/inter_medium"
+                        android:text="Height(cm)"
                         android:textColor="@color/grey"
                         android:textSize="12sp"
                         app:layout_constraintStart_toEndOf="@+id/label_height"
@@ -186,12 +186,12 @@
 
                     <EditText
                         android:id="@+id/et_height"
-                        android:background="@drawable/button_outline"
-                        android:padding="10dp"
-                        android:hint="Height"
-                        android:fontFamily="@font/poppins_medium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/button_outline"
+                        android:fontFamily="@font/poppins_medium"
+                        android:hint="Height"
+                        android:padding="10dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/label_weight"
                         app:layout_constraintTop_toBottomOf="@+id/label_weight" />
@@ -199,13 +199,43 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btn_register"
+                android:layout_width="260dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_margin="50dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="@dimen/btn_login_corner"
+                app:cardElevation="0dp">
 
-                android:text="@string/submit"
-                android:fontFamily="@font/roboto_black"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/button_outline_rounded"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:src="@drawable/google_button" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/urbanist_bold"
+                        android:text="Sign in with Google"
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

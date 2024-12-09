@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,10 +10,24 @@
     android:orientation="vertical"
     tools:context=".view.result.ResultActivity">
 
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:src="@drawable/background_detail"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="match_parent">
+
     <ImageView
         android:layout_width="172dp"
         android:layout_height="162dp"
-        android:src="@drawable/ic_result_not_found" />
+        android:src="@drawable/ic_result_success" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,17 +36,19 @@
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Sorry we cant find your materials"
+        android:text="Happy Cooking!"
         android:textAlignment="center"
         android:textColor="@color/main_color"
         android:textSize="25sp" />
 
     <Button
+        android:id="@+id/btn_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="65dp"
         android:background="@drawable/button_green"
         android:fontFamily="@font/roboto_black"
-        android:text="Retake Photo" />
+        android:text="Back to Dashboard" />
 
-</LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
