@@ -8,6 +8,7 @@ import com.example.nyam.data.NyamRepository
 import com.example.nyam.view.MainViewModel
 import com.example.nyam.view.camera.CameraViewModel
 import com.example.nyam.view.detail.FoodDetailViewModel
+import com.example.nyam.view.history.HistoryViewModel
 import com.example.nyam.view.home.HomeViewModel
 import com.example.nyam.view.recommended.RecommendedViewModel
 
@@ -28,6 +29,8 @@ class ViewModelFactory(private val repository: NyamRepository) :
             return RecommendedViewModel(repository) as T
         }else if (modelClass.isAssignableFrom(FoodDetailViewModel::class.java)) {
             return FoodDetailViewModel(repository) as T
+        }else if (modelClass.isAssignableFrom(HistoryViewModel::class.java)) {
+            return HistoryViewModel(repository) as T
         }
         return super.create(modelClass)
     }

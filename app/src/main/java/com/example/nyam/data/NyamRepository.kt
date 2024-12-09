@@ -4,14 +4,18 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
+import com.example.nyam.data.local.dao.HistoryDao
 import com.example.nyam.data.local.dao.RecipesDao
+import com.example.nyam.data.local.entity.HistoryEntity
 import com.example.nyam.data.local.entity.RecipesEntity
 import com.example.nyam.data.remote.response.ChosenFood
+import com.example.nyam.data.remote.response.FoodHistoryItem
+import com.example.nyam.data.remote.response.HistoryResponse
 import com.example.nyam.data.remote.response.PostResponse
 import com.example.nyam.data.remote.response.RegisterBody
 import com.example.nyam.data.remote.response.UserData
 import com.example.nyam.data.remote.retrofit.ApiService
-import kotlinx.coroutines.flow.Flow
+import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -20,7 +24,8 @@ import java.io.File
 
 class NyamRepository private constructor(
     private val apiService: ApiService,
-    private val recipesDao: RecipesDao
+    private val recipesDao: RecipesDao,
+    private val historyDao: HistoryDao
 
 ) {
 
@@ -28,7 +33,7 @@ class NyamRepository private constructor(
         return apiService.registerUser(userData)
     }
 
-    suspend fun getUser(id:String): UserData {
+    suspend fun getUser(id: String): UserData {
         return apiService.getUser(id)
     }
 
@@ -55,7 +60,7 @@ class NyamRepository private constructor(
         }
     }
 
-    fun uploadImage(id:String,imageFile: File) = liveData {
+    fun uploadImage(id: String, imageFile: File) = liveData {
         emit(ResultState.Loading)
         val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
         val multipartBody = MultipartBody.Part.createFormData(
@@ -64,10 +69,9 @@ class NyamRepository private constructor(
             requestImageFile
         )
         try {
-            val successResponse = apiService.uploadImage(id,multipartBody)
+            val successResponse = apiService.uploadImage(id, multipartBody)
             var id = 0
             val recipesList = successResponse.recipes.map { recipe ->
-
                 RecipesEntity(
                     id = id++,
                     image = recipe.image,
@@ -97,43 +101,52 @@ class NyamRepository private constructor(
         }
     }
 
-//    fun getHistory(id: String): LiveData<ResultState<List<FoodHistoryItem>>> = liveData {
-//        emit(ResultState.Loading)
-//        try {
-//            val response = apiService.getHistory(id)
-//            var id = 0
-//            if (response.foodHistory != null) {
-//                response.foodHistory.map { food ->
-//                    food?.let {
-//                        RecipesEntity(
-//                            id = id++,
-//                            image = it.imageUrl,
-//                            foodname = it.selectedFood.foodname,
-//                            dishType = TODO(),
-//                            mealType = TODO(),
-//                            howToCook = TODO(),
-//                            ingredients = TODO(),
-//                            sourceRecipes = TODO(),
-//                            cuisineType = TODO(),
-//                            calories = TODO(),
-//                            fat = TODO(),
-//                            carbs = TODO(),
-//                            protein = TODO(),
-//                        )
-//                    }
-//                }
-//            }
-//        }
-//    }
+    fun getHistory(id: String): LiveData<ResultState<List<HistoryEntity>>> = liveData {
+        emit(ResultState.Loading)
+        try {
+            val response = apiService.getHistory(id)
+            var id = 0
+            val history = response.foodHistory.map { food ->
+                HistoryEntity(
+                    id = id++,
+                    image = food.imageUrl,
+                    foodname = food.selectedFood.foodname,
+                    dishType = food.selectedFood.dishType.toString(),
+                    mealType = food.selectedFood.mealType.toString(),
+                    howToCook = food.selectedFood.howToCook,
+                    ingredients = food.selectedFood.ingredients.toString(),
+                    sourceRecipes = food.selectedFood.sourceRecipes,
+                    cuisineType = food.selectedFood.cuisineType.toString(),
+                    calories = food.selectedFood.fulfilledNeeds.calories as Double,
+                    fat = food.selectedFood.fulfilledNeeds.fat as Double,
+                    carbs = food.selectedFood.fulfilledNeeds.carbs as Double,
+                    protein = food.selectedFood.fulfilledNeeds.protein as Double
+                )
+            }
+            historyDao.deleteAllHistory()
+            historyDao.insertHistory(history)
+        } catch (e: HttpException) {
+            val errorBody = e.response()?.errorBody()?.string()
+            Log.d("REPOSITORY WOIIIIIIIIII", "GetHistory: $errorBody")
+            val errorResponse = Gson().fromJson(errorBody, HistoryResponse::class.java)
+            emit(ResultState.Error(errorBody.toString()))
+        } catch (e: Exception) {
+            emit(ResultState.Error(e.message.toString()))
+        }
+        val localData: LiveData<ResultState<List<HistoryEntity>>> =
+            historyDao.getHistory().map { ResultState.Success(it) }
+        emitSource(localData)
+    }
 
     companion object {
         @Volatile
         private var instance: NyamRepository? = null
         fun getInstance(
             apiService: ApiService,
-            recipesDao: RecipesDao
+            recipesDao: RecipesDao,
+            historyDao: HistoryDao
         ): NyamRepository = instance ?: synchronized(this) {
-            instance ?: NyamRepository( apiService, recipesDao)
+            instance ?: NyamRepository(apiService, recipesDao, historyDao)
         }.also { instance = it }
     }
 }

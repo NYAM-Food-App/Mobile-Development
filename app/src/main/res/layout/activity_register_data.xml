@@ -77,9 +77,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_outline"
                 android:fontFamily="@font/inter_medium"
-                android:textSize="14sp"
                 android:hint="Fill your name"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -109,16 +109,16 @@
 
             <EditText
                 android:id="@+id/et_age"
-                android:drawableEnd="@drawable/baseline_calendar_month_24"
                 android:layout_width="match_parent"
-                android:clickable="false"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_outline"
+                android:clickable="false"
+                android:drawableEnd="@drawable/baseline_calendar_month_24"
                 android:fontFamily="@font/inter_medium"
-                android:textSize="14sp"
-                android:hint="Fill your age"
-                android:inputType="number|numberDecimal"
-                android:padding="10dp" />
+                android:hint="yyyy/MM/dd"
+                android:inputType="date"
+                android:padding="10dp"
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -136,10 +136,10 @@
                 android:background="@drawable/button_outline"
                 android:entries="@array/allergies"
                 android:fontFamily="@font/inter_medium"
-                android:textSize="14sp"
                 android:hint="Allergies"
                 android:padding="10dp"
-                android:spinnerMode="dialog" />
+                android:spinnerMode="dialog"
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -167,12 +167,12 @@
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/button_outline"
-                        android:hint="Weight"
                         android:fontFamily="@font/inter_medium"
-                        android:textSize="14sp"
+                        android:hint="Weight"
                         android:padding="10dp"
+                        android:textSize="14sp"
+                        android:inputType="numberDecimal"
                         app:layout_constraintRight_toLeftOf="@+id/et_height"
-
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/label_height" />
 
@@ -197,8 +197,9 @@
                         android:background="@drawable/button_outline"
                         android:fontFamily="@font/inter_medium"
                         android:hint="Height"
-                        android:textSize="14sp"
                         android:padding="10dp"
+                        android:inputType="numberDecimal"
+                        android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/label_weight"
                         app:layout_constraintTop_toBottomOf="@+id/label_weight" />

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.credentials.ClearCredentialStateRequest
 import androidx.credentials.CredentialManager
 import androidx.lifecycle.lifecycleScope
+import androidx.room.util.newStringBuilder
 import com.bumptech.glide.Glide
 import com.example.nyam.data.ResultState
 import com.example.nyam.databinding.ActivityProfileBinding
@@ -18,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -62,7 +64,6 @@ class ProfileActivity : AppCompatActivity() {
         viewmodel.loginResult.observe(this){ result ->
             when(result){
                 is ResultState.Loading -> {
-
                 }
                 is ResultState.Success -> {
                     with(result.data){
@@ -70,13 +71,19 @@ class ProfileActivity : AppCompatActivity() {
                         binding.tvEmail.text = email
                         binding.tvAge.text = birthdate
                         if(gender == 0){ binding.tvGender.text = "Male" } else { binding.tvGender.text = "Female" }
-                        binding.tvAllergy.text = allergy.toString().first().uppercase()
+                        val stringBuilder = StringBuilder()
+                        for (j in allergy!!.indices){
+                            stringBuilder.append(allergy[j]?.replace("-free","")?.replaceFirstChar { if (it. isLowerCase()) it. titlecase(Locale. getDefault()) else it. toString() })
+                            if (j != allergy.size - 1) {
+                                stringBuilder.append(", ")
+                            }
+                        }
+                        binding.tvAllergy.text = stringBuilder.toString()
                     }
                 }
                 is ResultState.Error -> {
                     Toast.makeText(this, "Gagal memuat data", Toast.LENGTH_SHORT).show()
                 }
-
             }
         }
     }

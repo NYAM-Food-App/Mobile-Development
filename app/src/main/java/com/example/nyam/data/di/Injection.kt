@@ -10,6 +10,7 @@ object Injection {
         val apiService = ApiConfig.getApiService()
         val database = NyamDatabase.getInstance(context)
         val recipesDao = database.recipesDao()
-        return NyamRepository.getInstance(apiService,recipesDao)
+        val historyDao = database.historyDao()
+        return NyamRepository.getInstance(apiService,recipesDao,historyDao)
     }
 }

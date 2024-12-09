@@ -4,13 +4,20 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.nyam.data.local.dao.HistoryDao
 import com.example.nyam.data.local.dao.RecipesDao
+import com.example.nyam.data.local.entity.HistoryEntity
 import com.example.nyam.data.local.entity.RecipesEntity
 
-@Database(entities = [RecipesEntity::class], version = 1, exportSchema = false)
-abstract class NyamDatabase :RoomDatabase() {
+@Database(
+    entities = [RecipesEntity::class, HistoryEntity::class],
+    version = 1,
+    exportSchema = false
+)
+abstract class NyamDatabase : RoomDatabase() {
 
-    abstract fun recipesDao() : RecipesDao
+    abstract fun recipesDao(): RecipesDao
+    abstract fun historyDao(): HistoryDao
 
     companion object {
         @Volatile

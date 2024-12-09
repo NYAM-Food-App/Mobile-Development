@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class HistoryResponse(
 
 	@field:SerializedName("foodHistory")
-	val foodHistory: List<FoodHistoryItem?>? = null,
+	val foodHistory: List<FoodHistoryItem>,
 
 	@field:SerializedName("message")
 	val message: String? = null

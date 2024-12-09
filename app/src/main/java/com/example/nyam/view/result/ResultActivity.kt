@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.nyam.BaseClass
+import com.example.nyam.MainActivity
 import com.example.nyam.R
 import com.example.nyam.databinding.ActivityResultSuccessBinding
 import com.example.nyam.view.onboarding.OnBoardingActivity
@@ -18,16 +19,11 @@ class ResultActivity : BaseClass(false) {
         enableEdgeToEdge()
         _binding = ActivityResultSuccessBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-        setActionBar()
 
+        supportActionBar?.hide()
         binding.btnHome.setOnClickListener {
-            val intent = Intent(this, OnBoardingActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_TASK_ON_HOME
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             finish()
         }

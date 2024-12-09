@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.nyam.R
+import com.example.nyam.data.local.entity.HistoryEntity
 import com.example.nyam.data.local.entity.RecipesEntity
 import com.example.nyam.databinding.CardFoodBinding
 import com.example.nyam.view.detail.FoodDetailActivity
@@ -18,21 +19,20 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class RecipesAdapter :
-    ListAdapter<RecipesEntity, RecipesAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class HistoryAdapter :
+    ListAdapter<HistoryEntity, HistoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
     inner class MyViewHolder(private val binding: CardFoodBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(recipes: RecipesEntity) {
+        fun bind(history: HistoryEntity) {
             with(binding) {
-                tvItemName.text = recipes.foodname
-                Glide.with(itemView.context).load(recipes.image).apply(
+                tvItemName.text = history.foodname
+                Glide.with(itemView.context).load(history.image).apply(
                     RequestOptions.placeholderOf(R.drawable.ic_loading)
                         .error(R.drawable.ic_error)
-
                 ).into(ivFoodPhoto)
                 val myFormat = DecimalFormat("#")
-                tvCalories.text = myFormat.format(recipes.calories)
+                tvCalories.text = myFormat.format(history.calories)
 
                 itemView.setOnClickListener {
                     //TODO:Consider Animation
@@ -45,7 +45,7 @@ class RecipesAdapter :
 //                            Pair(tvCreatedAt,"time")
 //                        )
                     val intent = Intent(itemView.context, FoodDetailActivity::class.java)
-                    intent.putExtra(FoodDetailActivity.FOOD_ID, recipes.id)
+                    intent.putExtra(FoodDetailActivity.FOOD_ID, history.id)
                     itemView.context.startActivity(intent)
 //                    itemView.context.startActivity(intent,optionsCompat.toBundle())
 
@@ -77,17 +77,17 @@ class RecipesAdapter :
     }
 
     companion object {
-        val DIFF_CALLBACK: DiffUtil.ItemCallback<RecipesEntity> =
-            object : DiffUtil.ItemCallback<RecipesEntity>() {
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<HistoryEntity> =
+            object : DiffUtil.ItemCallback<HistoryEntity>() {
                 override fun areItemsTheSame(
-                    oldItem: RecipesEntity, newItem: RecipesEntity
+                    oldItem: HistoryEntity, newItem: HistoryEntity
                 ): Boolean {
                     return oldItem.id == newItem.id
                 }
 
                 @SuppressLint("DiffUtilEquals")
                 override fun areContentsTheSame(
-                    oldItem: RecipesEntity, newItem: RecipesEntity
+                    oldItem: HistoryEntity, newItem: HistoryEntity
                 ): Boolean {
                     return oldItem.equals(newItem)
                 }

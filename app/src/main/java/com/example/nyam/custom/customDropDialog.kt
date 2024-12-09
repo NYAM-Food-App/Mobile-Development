@@ -52,7 +52,7 @@ class customDropDialog @JvmOverloads constructor(
                 val stringBuilder = StringBuilder()
                 for (j in listAllergy.indices) {
                     stringBuilder.append(arrayAllergy[listAllergy[j]])
-                    selectedAlergy.add(arrayAllergy[listAllergy[j]].lowercase() + "-free")
+                    selectedAlergy.add(arrayAllergy[listAllergy[j]].replace(" ","-").lowercase() + "-free")
                     if (j != listAllergy.size - 1) {
                         stringBuilder.append(", ")
                     }

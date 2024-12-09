@@ -56,7 +56,7 @@ data class FoodHistoryItem(
 	val imageUrl: String,
 
 	@field:SerializedName("selectedFood")
-	val selectedFood: SelectedFood? = null,
+	val selectedFood: SelectedFood,
 
 	@field:SerializedName("timestamp")
 	val timestamp: Timestamp? = null
@@ -80,28 +80,28 @@ data class FulfilledNeeds(
 data class SelectedFood(
 
 	@field:SerializedName("image")
-	val image: String? = null,
+	val image: String,
 
 	@field:SerializedName("foodname")
-	val foodname: String? = null,
+	val foodname: String,
 
 	@field:SerializedName("dishType")
 	val dishType: List<String?>? = null,
 
 	@field:SerializedName("mealType")
-	val mealType: List<String?>? = null,
+	val mealType: List<String>,
 
 	@field:SerializedName("how to cook")
-	val howToCook: String? = null,
+	val howToCook: String,
 
 	@field:SerializedName("ingredients")
-	val ingredients: List<String?>? = null,
+	val ingredients: List<String>,
 
 	@field:SerializedName("source recipes")
-	val sourceRecipes: String? = null,
+	val sourceRecipes: String,
 
 	@field:SerializedName("cuisineType")
-	val cuisineType: List<String?>? = null,
+	val cuisineType: List<String>,
 
 	@field:SerializedName("fulfilledNeeds")
 	val fulfilledNeeds: FulfilledNeeds
