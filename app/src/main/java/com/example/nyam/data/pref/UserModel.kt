@@ -1,7 +1,6 @@
 package com.example.nyam.data.pref
 
 data class UserModel(
-    val name: String,
-    val email: String,
+    val id: String,
     val isLogin : Boolean = false
 )

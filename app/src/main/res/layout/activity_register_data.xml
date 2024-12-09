@@ -108,12 +108,14 @@
 
             <EditText
                 android:id="@+id/et_age"
+                android:drawableEnd="@drawable/baseline_calendar_month_24"
                 android:layout_width="match_parent"
+                android:clickable="false"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_outline"
                 android:fontFamily="@font/poppins_medium"
-                android:hint="Fill your age"
-                android:inputType="number|numberDecimal"
+                android:hint="yyyy/mm/dd"
+                android:inputType="date"
                 android:padding="10dp" />
 
             <TextView
