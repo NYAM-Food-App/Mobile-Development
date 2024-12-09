@@ -55,7 +55,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun goToEdit() {
-        intent = Intent(this)
+//        intent = Intent(this)
     }
 
     private fun getUserData() {
