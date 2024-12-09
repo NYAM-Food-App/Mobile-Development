@@ -1,4 +1,4 @@
-package com.example.nyam.view.personal
+package com.example.nyam.view.register
 
 import android.app.DatePickerDialog
 import android.content.Intent

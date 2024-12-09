@@ -53,6 +53,10 @@ class ProfileActivity : AppCompatActivity() {
             btnEditData.setOnClickListener{
                 goToEdit()
             }
+
+            binding.ivBack.setOnClickListener{
+                finish()
+            }
         }
     }
 

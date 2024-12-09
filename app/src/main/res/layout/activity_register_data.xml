@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.personal.RegisterDataActivity">
+    tools:context=".view.register.RegisterDataActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -113,6 +113,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_outline"
                 android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:drawableEnd="@drawable/baseline_calendar_month_24"
                 android:fontFamily="@font/inter_medium"
                 android:hint="yyyy/MM/dd"

@@ -20,7 +20,7 @@ import com.example.nyam.R
 import com.example.nyam.databinding.ActivityLoginBinding
 import com.example.nyam.helper.ViewModelFactory
 import com.example.nyam.view.MainViewModel
-import com.example.nyam.view.personal.RegisterDataActivity
+import com.example.nyam.view.register.RegisterDataActivity
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
