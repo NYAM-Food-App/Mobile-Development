@@ -20,6 +20,7 @@ data class PostResponse(
 )
 
 data class ChosenFood(
+	@field:SerializedName("selectedIndex")
 	val selectedIndex : Int
 )
 

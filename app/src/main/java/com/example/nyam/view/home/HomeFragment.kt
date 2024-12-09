@@ -15,6 +15,9 @@ import com.example.nyam.data.ResultState
 import com.example.nyam.databinding.FragmentHomeBinding
 import com.example.nyam.helper.ViewModelFactory
 import com.example.nyam.helper.getPercent
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class HomeFragment : Fragment() {
 
@@ -22,6 +25,8 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var colorList: List<ColorStateList?>
+
+    private lateinit var auth: FirebaseAuth
 
     private val viewModel by viewModels<HomeViewModel> {
         ViewModelFactory.getInstance(
@@ -35,7 +40,11 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        viewModel.getUser("W82AJqbULgU2nQg1mRUXrfFXVEu1")
+        auth = Firebase.auth
+        val firebaseUser = auth.currentUser
+        if (firebaseUser != null) {
+            viewModel.getUser(firebaseUser.uid)
+        }
         observeViewModel()
 
         return binding.root
@@ -60,12 +69,10 @@ class HomeFragment : Fragment() {
         viewModel.loginResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is ResultState.Loading -> {
-                    binding.tvBmi.text = "Loading"
+
                 }
 
                 is ResultState.Success -> {
-                    binding.tvBmi.text = "BMI Selesai"
-
                     with(result.data) {
                         val myFormat = DecimalFormat("#")
                         val cal = myFormat.format(fulfilledNeeds.calories as Double) + "/${dailyNeeds.calories}"
@@ -89,7 +96,7 @@ class HomeFragment : Fragment() {
                             valuesCalories.text = cal
                             percentCalories.text = calPercent
                             progressBarCalories.progress = calProgress
-//
+
                             valuesFat.text = fat
                             percentFat.text = fatPercent
                             progressBarFat.progress = fatProgress
@@ -114,7 +121,7 @@ class HomeFragment : Fragment() {
                 }
 
                 is ResultState.Error -> {
-                    Toast.makeText(requireContext(), "gagal", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Gagal memuat data", Toast.LENGTH_SHORT).show()
                 }
             }
         }

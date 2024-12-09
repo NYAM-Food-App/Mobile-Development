@@ -17,6 +17,7 @@ open class BaseClass(private val profile : Boolean) : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
         if(profile)
             menuInflater.inflate(R.menu.main_menu, menu)
         return super.onCreateOptionsMenu(menu)

@@ -13,6 +13,6 @@ class CameraViewModel(private val repository: NyamRepository): ViewModel() {
 
     var currentImageUri: Uri?  = null
 
-    fun uploadImage(file: File) = repository.uploadImage(file)
+    fun uploadImage(id :String,file: File) = repository.uploadImage(id,file)
 
 }

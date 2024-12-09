@@ -25,11 +25,16 @@ import com.example.nyam.helper.ViewModelFactory
 import com.example.nyam.helper.reduceFileImage
 import com.example.nyam.helper.uriToFile
 import com.example.nyam.view.camera.CameraXActivity.Companion.CAMERAX_RESULT
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class CameraFragment : Fragment() {
 
     private var _binding: FragmentCameraBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var auth: FirebaseAuth
 
     private var currentImageUri: Uri? = null
 
@@ -67,6 +72,8 @@ class CameraFragment : Fragment() {
         if (!allPermissionsGranted()) {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
         }
+
+        auth = Firebase.auth
 
         showImage()
         with(binding) {
@@ -122,22 +129,24 @@ class CameraFragment : Fragment() {
             Log.d("Image File", "showImage: ${imageFile.path}")
             val loadingDialog = AlertDialog.Builder(requireContext()).setView(R.layout.dialog_builder).create()
 
-            viewModel.uploadImage(imageFile).observe(viewLifecycleOwner) { result ->
-                if (result != null) {
-                    when (result) {
-                        is ResultState.Loading -> {
-                            loadingDialog.show()
-                        }
+            auth.currentUser?.uid?.let {
+                viewModel.uploadImage(it,imageFile).observe(viewLifecycleOwner) { result ->
+                    if (result != null) {
+                        when (result) {
+                            is ResultState.Loading -> {
+                                loadingDialog.show()
+                            }
 
-                        is ResultState.Success -> {
-                            showToast("${result.data.message} : ${result.data.foodPrediction.predictedClass}")
-                            loadingDialog.dismiss()
-                            findNavController().navigate(R.id.action_navigation_camera_to_recommendActivity)
-                        }
+                            is ResultState.Success -> {
+                                showToast("${result.data.message} : ${result.data.foodPrediction.predictedClass}")
+                                loadingDialog.dismiss()
+                                findNavController().navigate(R.id.action_navigation_camera_to_recommendActivity)
+                            }
 
-                        is ResultState.Error -> {
-                            showToast(result.error)
-                            loadingDialog.dismiss()
+                            is ResultState.Error -> {
+                                showToast(result.error)
+                                loadingDialog.dismiss()
+                            }
                         }
                     }
                 }

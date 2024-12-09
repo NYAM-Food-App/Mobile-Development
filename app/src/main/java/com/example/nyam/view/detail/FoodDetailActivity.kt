@@ -18,6 +18,9 @@ import com.example.nyam.data.ResultState
 import com.example.nyam.databinding.ActivityFoodDetailBinding
 import com.example.nyam.helper.ViewModelFactory
 import com.example.nyam.view.result.ResultActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class FoodDetailActivity : AppCompatActivity() {
     private lateinit var _binding: ActivityFoodDetailBinding
@@ -25,6 +28,8 @@ class FoodDetailActivity : AppCompatActivity() {
     private val viewModel by viewModels<FoodDetailViewModel> {
         ViewModelFactory.getInstance(this)
     }
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityFoodDetailBinding.inflate(layoutInflater)
@@ -36,25 +41,33 @@ class FoodDetailActivity : AppCompatActivity() {
             insets
         }
         setActionBar()
+
+        auth = Firebase.auth
+        val firebaseUser = auth.currentUser
+
         val id= intent.getIntExtra(FOOD_ID,0)
         val loadingDialog = AlertDialog.Builder(this).setView(R.layout.dialog_builder).create()
 
         binding.btnEat.setOnClickListener {
-            viewModel.chooseFood("W82AJqbULgU2nQg1mRUXrfFXVEu1",id).observe(this){ result->
-                when(result){
-                    is ResultState.Loading -> {
-                        loadingDialog.show()
-                    }
-                    is ResultState.Success -> {
-                        loadingDialog.dismiss()
-                        Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this    ,ResultActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_TASK_ON_HOME or Intent.FLAG_ACTIVITY_NEW_TASK
-                        startActivity(intent)
-                    }
-                    is ResultState.Error -> {
-                        loadingDialog.dismiss()
-                        Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+            firebaseUser?.uid?.let { it1 ->
+                viewModel.chooseFood(it1,id).observe(this){ result->
+                    when(result){
+                        is ResultState.Loading -> {
+                            loadingDialog.show()
+                        }
+
+                        is ResultState.Success -> {
+                            loadingDialog.dismiss()
+                            Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this    ,ResultActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_TASK_ON_HOME or Intent.FLAG_ACTIVITY_NEW_TASK
+                            startActivity(intent)
+                        }
+
+                        is ResultState.Error -> {
+                            loadingDialog.dismiss()
+                            Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }

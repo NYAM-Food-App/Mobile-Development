@@ -50,12 +50,6 @@ class OnBoardingActivity : AppCompatActivity() {
             finish()
             return
         }
-        viewModel.getSession().observe(this) { user ->
-            if (user.isLogin) {
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            }
-        }
 
         binding.btnSkip.setOnClickListener {
             val intent = Intent(baseContext, LoginActivity::class.java)

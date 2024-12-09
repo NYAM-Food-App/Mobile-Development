@@ -17,30 +17,29 @@ import retrofit2.http.Path
 interface ApiService {
 
 
-    //TODO: NEED TO DELETE STATIC STRING
     @GET("user/{id}")
     suspend fun getUser(
-        @Path("id") id: String = "W82AJqbULgU2nQg1mRUXrfFXVEu1"
+        @Path("id") id: String
     ): UserData
 
 
     @Multipart
     @POST("analyze/{id}")
     suspend fun uploadImage(
-        @Part file: MultipartBody.Part,
-        @Path("id") id: String = "W82AJqbULgU2nQg1mRUXrfFXVEu1"
+        @Path("id") id: String,
+        @Part file: MultipartBody.Part
     ): AnalyzeResponse
 
 
     @POST("choose/food/{id}")
     suspend fun chooseFood(
-        @Path("id") id: String = "W82AJqbULgU2nQg1mRUXrfFXVEu1",
+        @Path("id") id: String,
         @Body selectedIndex: ChosenFood
     ): PostResponse
 
     @GET("history/food/{id}")
     suspend fun getHistory(
-        @Path("id") id: String = "W82AJqbULgU2nQg1mRUXrfFXVEu1"
+        @Path("id") id: String
     ): HistoryResponse
 
     @POST("auth/register")

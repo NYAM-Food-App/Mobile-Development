@@ -6,8 +6,6 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.map
 import com.example.nyam.data.local.dao.RecipesDao
 import com.example.nyam.data.local.entity.RecipesEntity
-import com.example.nyam.data.pref.UserModel
-import com.example.nyam.data.pref.UserPreference
 import com.example.nyam.data.remote.response.ChosenFood
 import com.example.nyam.data.remote.response.PostResponse
 import com.example.nyam.data.remote.response.RegisterBody
@@ -21,7 +19,6 @@ import retrofit2.HttpException
 import java.io.File
 
 class NyamRepository private constructor(
-    private val userPreference: UserPreference,
     private val apiService: ApiService,
     private val recipesDao: RecipesDao
 
@@ -58,7 +55,7 @@ class NyamRepository private constructor(
         }
     }
 
-    fun uploadImage(imageFile: File) = liveData {
+    fun uploadImage(id:String,imageFile: File) = liveData {
         emit(ResultState.Loading)
         val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
         val multipartBody = MultipartBody.Part.createFormData(
@@ -67,7 +64,7 @@ class NyamRepository private constructor(
             requestImageFile
         )
         try {
-            val successResponse = apiService.uploadImage(multipartBody)
+            val successResponse = apiService.uploadImage(id,multipartBody)
             var id = 0
             val recipesList = successResponse.recipes.map { recipe ->
 
@@ -129,27 +126,14 @@ class NyamRepository private constructor(
 //        }
 //    }
 
-    suspend fun saveSession(user: UserModel) {
-        userPreference.saveSession(user)
-    }
-
-    fun getSession(): Flow<UserModel> {
-        return userPreference.getSession()
-    }
-
-    suspend fun logout() {
-        userPreference.logout()
-    }
-
     companion object {
         @Volatile
         private var instance: NyamRepository? = null
         fun getInstance(
-            userPreference: UserPreference,
             apiService: ApiService,
             recipesDao: RecipesDao
         ): NyamRepository = instance ?: synchronized(this) {
-            instance ?: NyamRepository(userPreference, apiService, recipesDao)
+            instance ?: NyamRepository( apiService, recipesDao)
         }.also { instance = it }
     }
 }

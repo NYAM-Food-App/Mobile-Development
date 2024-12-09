@@ -1,13 +1,10 @@
 package com.example.nyam.view
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.nyam.data.NyamRepository
 import com.example.nyam.data.ResultState
-import com.example.nyam.data.pref.UserModel
 import com.example.nyam.data.remote.response.PostResponse
 import com.example.nyam.data.remote.response.RegisterBody
 import com.example.nyam.data.remote.response.UserData
@@ -19,23 +16,9 @@ class MainViewModel(private val repository: NyamRepository) : ViewModel() {
 
     private val _loginResult = MutableLiveData<ResultState<UserData>>()
     val loginResult = _loginResult
+
     private val _registerResult = MutableLiveData<ResultState<PostResponse>>()
     val registerResult = _registerResult
-
-    fun getSession(): LiveData<UserModel> {
-        return repository.getSession().asLiveData()
-    }
-
-    fun login(user: UserModel) {
-        viewModelScope.launch {
-            repository.saveSession(user)
-        }
-    }
-    fun logout() {
-        viewModelScope.launch {
-            repository.logout()
-        }
-    }
 
     fun registerUser(userData: RegisterBody) {
         viewModelScope.launch {

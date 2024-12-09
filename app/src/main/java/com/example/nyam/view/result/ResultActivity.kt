@@ -1,5 +1,6 @@
 package com.example.nyam.view.result
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
@@ -7,6 +8,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.nyam.BaseClass
 import com.example.nyam.R
 import com.example.nyam.databinding.ActivityResultSuccessBinding
+import com.example.nyam.view.onboarding.OnBoardingActivity
 
 class ResultActivity : BaseClass(false) {
     private lateinit var _binding: ActivityResultSuccessBinding
@@ -24,6 +26,9 @@ class ResultActivity : BaseClass(false) {
         setActionBar()
 
         binding.btnHome.setOnClickListener {
+            val intent = Intent(this, OnBoardingActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_TASK_ON_HOME
+            startActivity(intent)
             finish()
         }
 
