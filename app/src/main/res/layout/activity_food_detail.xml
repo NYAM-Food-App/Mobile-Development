@@ -21,6 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="Contoh Makanan"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/card_photo" />
@@ -61,14 +63,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="Fat :" />
+                    android:text="Fat :"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/transparent_black"
+                    android:textSize="14sp"/>
+
 
                 <TextView
                     android:id="@+id/tv_fat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
-                    android:text="600" />
+                    android:text="600"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/transparent_black"
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -93,7 +102,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="Carbs :" />
+                    android:text="Carbs :"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/transparent_black"
+                    android:textSize="14sp"/>
 
                 <TextView
                     android:id="@+id/tv_carbs"
@@ -101,7 +113,10 @@
                     android:layout_height="wrap_content"
 
                     android:layout_marginStart="2dp"
-                    android:text="600" />
+                    android:text="600"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/transparent_black"
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -126,15 +141,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="Protein :" />
+                    android:text="Protein :"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/transparent_black"
+                    android:textSize="14sp"/>
 
                 <TextView
                     android:id="@+id/tv_protein"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_marginStart="2dp"
-                    android:text="600" />
+                    android:text="600"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/transparent_black"
+                    android:textSize="12sp"/>
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -145,9 +165,13 @@
         android:id="@+id/tv_recipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="24dp"
         android:text="Recipe"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/main_color"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/card_nutrient" />
 
@@ -158,6 +182,9 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:text="Ingredients:"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_recipe" />
 

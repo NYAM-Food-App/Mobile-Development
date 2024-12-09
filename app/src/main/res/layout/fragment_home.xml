@@ -20,6 +20,9 @@
             android:layout_marginStart="36dp"
             android:layout_marginTop="24dp"
             android:text="Daily Report"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/main_color"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,6 +43,9 @@
             android:layout_marginStart="36dp"
             android:layout_marginTop="36dp"
             android:text="Body Mass Index"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/main_color"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card_daily_report" />
 

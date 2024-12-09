@@ -17,6 +17,9 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="20dp"
             android:text="Your History"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/main_color"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

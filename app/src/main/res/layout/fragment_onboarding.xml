@@ -24,7 +24,7 @@
         android:layout_marginTop="36dp"
         android:fontFamily="@font/poppins_semibold"
         android:gravity="center"
-        android:text="Hello"
+        android:text="Hai, Welcome to   Nyam"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="16dp"
@@ -42,7 +42,8 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginHorizontal="12dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,"
+        android:text="We’re here to help you achieve a balanced,
+nutritious diet. Discover more about the food you eat and find the best choices for your body’s needs!"
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"

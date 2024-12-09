@@ -76,7 +76,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_outline"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/inter_medium"
+                android:textSize="14sp"
                 android:hint="Fill your name"
                 android:padding="10dp" />
 
@@ -111,7 +112,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_outline"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/inter_medium"
+                android:textSize="14sp"
                 android:hint="Fill your age"
                 android:inputType="number|numberDecimal"
                 android:padding="10dp" />
@@ -131,7 +133,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_outline"
                 android:entries="@array/allergies"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/inter_medium"
+                android:textSize="14sp"
                 android:hint="Allergies"
                 android:padding="10dp"
                 android:spinnerMode="dialog" />
@@ -162,8 +165,9 @@
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/button_outline"
-                        android:fontFamily="@font/poppins_medium"
                         android:hint="Weight"
+                        android:fontFamily="@font/inter_medium"
+                        android:textSize="14sp"
                         android:padding="10dp"
                         app:layout_constraintRight_toLeftOf="@+id/et_height"
 
@@ -189,8 +193,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/button_outline"
-                        android:fontFamily="@font/poppins_medium"
+                        android:fontFamily="@font/inter_medium"
                         android:hint="Height"
+                        android:textSize="14sp"
                         android:padding="10dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/label_weight"
