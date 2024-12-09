@@ -5,12 +5,14 @@ import com.example.nyam.data.remote.response.HistoryResponse
 import com.example.nyam.data.remote.response.ChosenFood
 import com.example.nyam.data.remote.response.PostResponse
 import com.example.nyam.data.remote.response.RegisterBody
+import com.example.nyam.data.remote.response.UpdateBody
 import com.example.nyam.data.remote.response.UserData
 import okhttp3.MultipartBody
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
 
@@ -46,4 +48,10 @@ interface ApiService {
     suspend fun registerUser(
         @Body userData: RegisterBody
     ): PostResponse
+
+    @PUT("user/{id}")
+    suspend fun updateUser(
+        @Path("id") id: String,
+        @Body userData: UpdateBody
+    ):PostResponse
 }

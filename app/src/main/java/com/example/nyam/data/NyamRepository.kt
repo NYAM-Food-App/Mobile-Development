@@ -13,8 +13,12 @@ import com.example.nyam.data.remote.response.FoodHistoryItem
 import com.example.nyam.data.remote.response.HistoryResponse
 import com.example.nyam.data.remote.response.PostResponse
 import com.example.nyam.data.remote.response.RegisterBody
+import com.example.nyam.data.remote.response.UpdateBody
 import com.example.nyam.data.remote.response.UserData
 import com.example.nyam.data.remote.retrofit.ApiService
+import com.google.firebase.auth.auth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -26,11 +30,14 @@ class NyamRepository private constructor(
     private val apiService: ApiService,
     private val recipesDao: RecipesDao,
     private val historyDao: HistoryDao
-
 ) {
 
     suspend fun registerUser(userData: RegisterBody): PostResponse {
         return apiService.registerUser(userData)
+    }
+
+    suspend fun updateUser(id:String,userData: UpdateBody): PostResponse {
+        return apiService.updateUser(id,userData)
     }
 
     suspend fun getUser(id: String): UserData {

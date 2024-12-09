@@ -154,3 +154,24 @@ data class RegisterBody(
 
 )
 
+data class UpdateBody(
+
+	@field:SerializedName("fullname")
+	val fullname: String,
+	@field:SerializedName("birthdate")
+	val birthdate: String,
+
+	@field:SerializedName("gender")
+	val gender: Int,
+
+	@field:SerializedName("allergy")
+	val allergy: List<String>,
+
+	@field:SerializedName("height")
+	val height: Int,
+
+	@field:SerializedName("weight")
+	val weight: Int
+
+)
+

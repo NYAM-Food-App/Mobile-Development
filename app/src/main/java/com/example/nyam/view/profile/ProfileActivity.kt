@@ -15,6 +15,7 @@ import com.example.nyam.databinding.ActivityProfileBinding
 import com.example.nyam.helper.ViewModelFactory
 import com.example.nyam.view.MainViewModel
 import com.example.nyam.view.onboarding.OnBoardingActivity
+import com.example.nyam.view.updateData.UpdateDataActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -31,6 +32,12 @@ class ProfileActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        auth = Firebase.auth
+        val firebaseUser = auth.currentUser
+        viewmodel.getUser(firebaseUser?.uid.toString())
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
@@ -50,19 +57,22 @@ class ProfileActivity : AppCompatActivity() {
             btnLogout.setOnClickListener {
                 signOut()
             }
+
             btnEditData.setOnClickListener{
-                goToEdit()
+                goToUpdate()
             }
 
-            binding.ivBack.setOnClickListener{
+            ivBack.setOnClickListener{
                 finish()
             }
         }
     }
 
-    private fun goToEdit() {
-//        intent = Intent(this)
+    private fun goToUpdate() {
+        intent = Intent(this, UpdateDataActivity::class.java)
+        startActivity(intent)
     }
+
 
     private fun getUserData() {
         viewmodel.loginResult.observe(this){ result ->
