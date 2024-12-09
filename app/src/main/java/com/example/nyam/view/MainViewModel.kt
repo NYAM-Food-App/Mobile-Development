@@ -50,6 +50,9 @@ class MainViewModel(private val repository: NyamRepository) : ViewModel() {
                 val errorMessage = errorBody.message
                 _registerResult.value = errorMessage?.let { ResultState.Error(it) }
             }
+            catch (e: Exception){
+                _registerResult.value = ResultState.Error(e.message.toString())
+            }
         }
 
     }

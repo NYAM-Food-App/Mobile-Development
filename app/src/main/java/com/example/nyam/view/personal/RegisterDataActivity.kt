@@ -1,10 +1,13 @@
 package com.example.nyam.view.personal
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
@@ -14,6 +17,7 @@ import androidx.credentials.exceptions.GetCredentialException
 import androidx.lifecycle.lifecycleScope
 import com.example.nyam.MainActivity
 import com.example.nyam.R
+import com.example.nyam.data.ResultState
 import com.example.nyam.data.remote.response.RegisterBody
 import com.example.nyam.databinding.ActivityRegisterDataBinding
 import com.example.nyam.helper.ViewModelFactory
@@ -28,6 +32,9 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class RegisterDataActivity : AppCompatActivity() {
 
@@ -35,6 +42,8 @@ class RegisterDataActivity : AppCompatActivity() {
     private val binding get() = _binding
 
     private lateinit var auth: FirebaseAuth
+
+    private val calendar = Calendar.getInstance()
 
     private val viewModel by viewModels<MainViewModel> {
         ViewModelFactory.getInstance(this)
@@ -52,10 +61,55 @@ class RegisterDataActivity : AppCompatActivity() {
             register()
         }
 
+        binding.etAge.setOnClickListener {
+            showDatePicker()
+        }
+
     }
 
+    private fun showDatePicker() {
+        val datePickerDialog = DatePickerDialog(
+            this, { DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(year, monthOfYear, dayOfMonth)
+                val dateFormat = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
+                val formattedDate = dateFormat.format(selectedDate.time)
+                binding.etAge.setText(formattedDate)
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        datePickerDialog.show()
+    }
+
+    /*
+    Returns false if required field is not filled
+     */
+    private fun fieldValidation(): Boolean {
+
+        with(binding) {
+            if (etName.text.isNullOrBlank() or etName.text.isNullOrEmpty() or
+                etAge.text.isNullOrBlank() or etAge.text.isNullOrEmpty() or
+                etHeight.text.isNullOrBlank() or etHeight.text.isNullOrEmpty() or
+                etWeight.text.isNullOrBlank() or etWeight.text.isNullOrEmpty()
+            ) {
+                Toast.makeText(
+                    this@RegisterDataActivity,
+                    "Please fill all the field",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return false
+            }
+        }
+        return true
+    }
 
     private fun register() {
+        if (!fieldValidation() ) {
+            return
+        }
+
         val credentialManager =
             CredentialManager.create(this) //import from androidx.CredentialManager
 
@@ -120,26 +174,46 @@ class RegisterDataActivity : AppCompatActivity() {
                     Log.d(TAG, "signInWithCredential:success")
                     val user: FirebaseUser? = auth.currentUser
 
-                    with(binding){
+                    with(binding) {
                         val fullName = etName.text.toString()
                         val gender = spinGender.selectedItemPosition
+                        val age = etAge.text.toString()
                         val allergy = spinAllergy.selectedAlergy
                         val height = etHeight.text.toString()
                         val weight = etWeight.text.toString()
-                    }
-                    viewModel.registerUser(
-                        RegisterBody(
-                            uid = user?.uid.toString(),
-                            fullname = TODO(),
-                            birthdate = TODO(),
-                            gender = TODO(),
-                            allergy = TODO(),
-                            height = TODO(),
-                            weight = TODO(),
+                        viewModel.registerUser(
+                            RegisterBody(
+                                uid = user?.uid.toString(),
+                                fullname = fullName,
+                                birthdate = age,
+                                gender = gender,
+                                allergy = allergy.toList(),
+                                height = height.toInt(),
+                                weight = weight.toInt(),
+                            )
                         )
-                    )
+                    }
 
-                    updateUI(user)
+                    val loadingDialog =
+                        AlertDialog.Builder(this).setView(R.layout.dialog_builder).create()
+                    viewModel.registerResult.observe(this) { result ->
+                        when (result) {
+                            is ResultState.Loading -> {
+                                loadingDialog.show()
+                            }
+
+                            is ResultState.Success -> {
+                                loadingDialog.dismiss()
+                                updateUI(user)
+                            }
+
+                            is ResultState.Error -> {
+                                loadingDialog.dismiss()
+                                Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                                updateUI(null)
+                            }
+                        }
+                    }
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
@@ -156,6 +230,7 @@ class RegisterDataActivity : AppCompatActivity() {
             finish()
         }
     }
+
     companion object {
         private const val TAG = "RegisterActivity"
     }

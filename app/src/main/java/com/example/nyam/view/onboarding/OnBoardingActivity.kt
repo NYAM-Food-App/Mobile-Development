@@ -16,9 +16,13 @@ import com.example.nyam.databinding.ActivityOnboardingBinding
 import com.example.nyam.helper.ViewModelFactory
 import com.example.nyam.view.MainViewModel
 import com.example.nyam.view.login.LoginActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class OnBoardingActivity : AppCompatActivity() {
 
+    private lateinit var auth: FirebaseAuth
     private var onBoardingPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
             changeCircleMark(position)
@@ -38,6 +42,14 @@ class OnBoardingActivity : AppCompatActivity() {
         supportActionBar?.hide()
         setContentView(binding.root)
 
+        auth = Firebase.auth
+        val firebaseUser = auth.currentUser
+        if (firebaseUser != null) {
+            // Not signed in, launch the Login activity
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+            return
+        }
         viewModel.getSession().observe(this) { user ->
             if (user.isLogin) {
                 startActivity(Intent(this, MainActivity::class.java))

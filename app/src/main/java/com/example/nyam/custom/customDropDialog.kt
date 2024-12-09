@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatTextView
@@ -18,7 +19,7 @@ class customDropDialog @JvmOverloads constructor(
 
     private var listAllergy: ArrayList<Int> = ArrayList()
     var arrayAllergy: Array<String> = resources.getStringArray(R.array.allergies)
-    var selectedAlergy :List<String> = listOf()
+    var selectedAlergy :ArrayList<String> = ArrayList()
 
     private var arrowDown: Drawable = ContextCompat.getDrawable(context, R.drawable.ic_arrow_down) as Drawable
 
@@ -61,6 +62,7 @@ class customDropDialog @JvmOverloads constructor(
                 for (j in listAllergy.indices) {
                     // concat array value
                     stringBuilder.append(arrayAllergy[listAllergy[j]])
+                    selectedAlergy.add(arrayAllergy[listAllergy[j]]+"-free")
                     // check condition
                     if (j != listAllergy.size - 1) {
                         // When j value  not equal
@@ -71,8 +73,6 @@ class customDropDialog @JvmOverloads constructor(
                 }
                 // set text on textView
                 text = stringBuilder.toString()
-                selectedAlergy = arrayAllergy.toList()
-
 //                // set text on textView
 //                textView.setText(stringBuilder.toString())
             }
