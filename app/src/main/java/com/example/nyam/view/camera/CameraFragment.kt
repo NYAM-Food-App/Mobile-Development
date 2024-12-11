@@ -130,7 +130,7 @@ class CameraFragment : Fragment() {
             val loadingDialog = AlertDialog.Builder(requireContext()).setView(R.layout.dialog_builder).create()
 
             auth.currentUser?.uid?.let {
-                viewModel.uploadImage(it,imageFile).observe(viewLifecycleOwner) { result ->
+                viewModel.analyzeImage(it,imageFile).observe(viewLifecycleOwner) { result ->
                     if (result != null) {
                         when (result) {
                             is ResultState.Loading -> {

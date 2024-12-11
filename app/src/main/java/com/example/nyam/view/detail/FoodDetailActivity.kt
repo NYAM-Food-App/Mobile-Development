@@ -2,6 +2,7 @@ package com.example.nyam.view.detail
 
 import android.content.Intent
 import android.icu.text.DecimalFormat
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -48,6 +49,11 @@ class FoodDetailActivity : AppCompatActivity() {
         val id= intent.getIntExtra(FOOD_ID,0)
         val loadingDialog = AlertDialog.Builder(this).setView(R.layout.dialog_builder).create()
 
+        binding.tvLink.setOnClickListener {
+            val intentUrl = Intent(Intent.ACTION_VIEW, Uri.parse(binding.tvLink.text.toString()))
+            binding.root.context.startActivity(intentUrl)
+        }
+
         binding.btnEat.setOnClickListener {
             firebaseUser?.uid?.let { it1 ->
                 viewModel.chooseFood(it1,id).observe(this){ result->
@@ -91,6 +97,7 @@ class FoodDetailActivity : AppCompatActivity() {
                 tvCarbs.text = myFormat.format(recipe.carbs)
                 tvProtein.text = myFormat.format(recipe.protein)
                 valueIngredients.text = recipe.ingredients.substring(1, recipe.ingredients.length - 1).replace(", ","\n")
+                tvLink.text = recipe.howToCook
             }
         }
     }

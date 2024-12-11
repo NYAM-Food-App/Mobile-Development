@@ -5,6 +5,7 @@ import com.example.nyam.data.remote.response.HistoryResponse
 import com.example.nyam.data.remote.response.ChosenFood
 import com.example.nyam.data.remote.response.PostResponse
 import com.example.nyam.data.remote.response.RegisterBody
+import com.example.nyam.data.remote.response.TextBody
 import com.example.nyam.data.remote.response.UpdateBody
 import com.example.nyam.data.remote.response.UserData
 import okhttp3.MultipartBody
@@ -27,9 +28,16 @@ interface ApiService {
 
     @Multipart
     @POST("analyze/{id}")
-    suspend fun uploadImage(
+    suspend fun analyzeImage(
         @Path("id") id: String,
         @Part file: MultipartBody.Part
+    ): AnalyzeResponse
+
+
+    @POST("analyze/text/{id}")
+    suspend fun analyzeFood(
+        @Path("id") id: String,
+        @Body queryText :TextBody
     ): AnalyzeResponse
 
 

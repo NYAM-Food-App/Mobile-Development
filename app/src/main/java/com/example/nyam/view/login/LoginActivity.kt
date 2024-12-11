@@ -72,6 +72,7 @@ class LoginActivity : AppCompatActivity() {
 
         val googleIdOption = GetGoogleIdOption.Builder()
             .setFilterByAuthorizedAccounts(true)
+
             .setServerClientId(getString(R.string.your_web_client_id)) //from https://console.firebase.google.com/project/firebaseProjectName/authentication/providers
             .build()
 
@@ -96,7 +97,6 @@ class LoginActivity : AppCompatActivity() {
             }
             catch (e: GetCredentialException) { //import from androidx.CredentialManager
                 Log.d("Error", e.message.toString())
-                goToRegister()
             }
         }
     }
@@ -111,7 +111,9 @@ class LoginActivity : AppCompatActivity() {
                         // Use googleIdTokenCredential and extract id to validate and authenticate on your server.
                         val googleIdTokenCredential =
                             GoogleIdTokenCredential.createFrom(credential.data)
+
                         firebaseAuthWithGoogle(googleIdTokenCredential.idToken)
+
                     } catch (e: GoogleIdTokenParsingException) {
                         Log.e(TAG, "Received an invalid google id token response", e)
                     }

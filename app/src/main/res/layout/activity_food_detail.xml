@@ -17,11 +17,12 @@
 
     <TextView
         android:id="@+id/tv_food"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
         android:layout_marginTop="5dp"
-        android:text="Contoh Makanan"
         android:fontFamily="@font/poppins_medium"
+        android:text="Contoh Makanan"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,10 +64,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="Fat :"
                     android:fontFamily="@font/poppins_medium"
+                    android:text="Fat :"
                     android:textColor="@color/transparent_black"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
 
                 <TextView
@@ -74,10 +75,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
-                    android:text="600"
                     android:fontFamily="@font/poppins_medium"
+                    android:text="600"
                     android:textColor="@color/transparent_black"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -102,10 +103,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="Carbs :"
                     android:fontFamily="@font/poppins_medium"
+                    android:text="Carbs :"
                     android:textColor="@color/transparent_black"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tv_carbs"
@@ -113,10 +114,10 @@
                     android:layout_height="wrap_content"
 
                     android:layout_marginStart="2dp"
-                    android:text="600"
                     android:fontFamily="@font/poppins_medium"
+                    android:text="600"
                     android:textColor="@color/transparent_black"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -141,20 +142,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="Protein :"
                     android:fontFamily="@font/poppins_medium"
+                    android:text="Protein :"
                     android:textColor="@color/transparent_black"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tv_protein"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
-                    android:text="600"
                     android:fontFamily="@font/poppins_medium"
+                    android:text="600"
                     android:textColor="@color/transparent_black"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -166,8 +167,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Recipe"
         android:fontFamily="@font/poppins_medium"
+        android:text="Recipe"
         android:textColor="@color/main_color"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -181,23 +182,57 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
-        android:text="Ingredients:"
         android:fontFamily="@font/poppins_medium"
+        android:text="Ingredients:"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_recipe" />
 
+    <ScrollView
+        android:id="@+id/sv_ingredients"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_ingredient"
+        app:layout_constraintBottom_toTopOf="@+id/tv_link"
+        app:layout_constraintTop_toBottomOf="@id/tv_ingredient">
+
+        <TextView
+            android:id="@+id/value_ingredients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </ScrollView>
+
     <TextView
-        android:id="@+id/value_ingredients"
+        android:id="@+id/tv_source"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Source :"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@id/tv_ingredient"
-        app:layout_constraintTop_toBottomOf="@id/tv_ingredient" />
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_eat" />
+
+    <TextView
+        android:id="@+id/tv_link"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="16dp"
+        android:linksClickable="true"
+        android:text="Link to Source"
+        android:textColor="#5566ff"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_eat"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_source" />
 
     <Button
-        android:layout_width="0dp"
         android:id="@+id/btn_eat"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:layout_marginBottom="25dp"

@@ -29,4 +29,9 @@
         android:name="com.example.nyam.view.recommended.RecommendActivity"
         android:label="activity_recommend"
         tools:layout="@layout/activity_recommend" />
+    <fragment
+        android:id="@+id/navigation_menu"
+        android:name="com.example.nyam.view.recipe.RecommendedFragment"
+        android:label="activity_menu"
+        tools:layout="@layout/activity_recommend_input" />
 </navigation>

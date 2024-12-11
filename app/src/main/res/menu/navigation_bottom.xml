@@ -9,6 +9,10 @@
         android:icon="@drawable/ic_camera_fill"
         android:title="@string/bottom_nav_title" />
     <item
+        android:id="@+id/navigation_menu"
+        android:icon="@drawable/baseline_menu_book_24"
+        android:title="@string/bottom_nav_title" />
+    <item
         android:id="@+id/navigation_history"
         android:icon="@drawable/ic_history_fill"
         android:title="@string/bottom_nav_title" />

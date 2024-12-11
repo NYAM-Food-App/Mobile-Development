@@ -43,6 +43,7 @@ class MainActivity : BaseClass(true) {
             setOf(
                 R.id.navigation_home,
                 R.id.navigation_camera,
+                R.id.navigation_menu,
                 R.id.navigation_history
             )
         )

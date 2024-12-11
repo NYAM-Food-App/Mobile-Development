@@ -34,22 +34,6 @@ class HistoryAdapter :
                 val myFormat = DecimalFormat("#")
                 tvCalories.text = myFormat.format(history.calories)
 
-                itemView.setOnClickListener {
-                    //TODO:Consider Animation
-//                    val optionsCompat: ActivityOptionsCompat =
-//                        ActivityOptionsCompat.makeSceneTransitionAnimation(
-//                            itemView.context as Activity,
-//                            Pair(ivProfile, "profile"),
-//                            Pair(tvItemName, "name"),
-//                            Pair(ivItemPhoto, "photo"),
-//                            Pair(tvCreatedAt,"time")
-//                        )
-                    val intent = Intent(itemView.context, FoodDetailActivity::class.java)
-                    intent.putExtra(FoodDetailActivity.FOOD_ID, history.id)
-                    itemView.context.startActivity(intent)
-//                    itemView.context.startActivity(intent,optionsCompat.toBundle())
-
-                }
             }
 
         }

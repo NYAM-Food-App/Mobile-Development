@@ -174,4 +174,9 @@ data class UpdateBody(
 	val weight: Int
 
 )
+data class TextBody(
+
+	@field:SerializedName("queryText")
+	val queryText: String,
+)
 

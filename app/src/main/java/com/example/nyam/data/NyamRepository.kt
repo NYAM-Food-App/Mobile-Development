@@ -8,17 +8,15 @@ import com.example.nyam.data.local.dao.HistoryDao
 import com.example.nyam.data.local.dao.RecipesDao
 import com.example.nyam.data.local.entity.HistoryEntity
 import com.example.nyam.data.local.entity.RecipesEntity
+import com.example.nyam.data.remote.response.AnalyzeResponse
 import com.example.nyam.data.remote.response.ChosenFood
-import com.example.nyam.data.remote.response.FoodHistoryItem
 import com.example.nyam.data.remote.response.HistoryResponse
 import com.example.nyam.data.remote.response.PostResponse
 import com.example.nyam.data.remote.response.RegisterBody
+import com.example.nyam.data.remote.response.TextBody
 import com.example.nyam.data.remote.response.UpdateBody
 import com.example.nyam.data.remote.response.UserData
 import com.example.nyam.data.remote.retrofit.ApiService
-import com.google.firebase.auth.auth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -48,9 +46,14 @@ class NyamRepository private constructor(
         emit(ResultState.Loading)
         try {
             val response = apiService.chooseFood(id, ChosenFood(index))
+            recipesDao.deleteAllRecipes()
             emit(ResultState.Success(response))
-        } catch (e: HttpException) {
-            emit(ResultState.Error(e.message.toString()))
+        }
+        catch (e: HttpException) {
+            val errorBody = e.response()?.errorBody()?.string()
+            Log.d("REPOSITORY WOIIIIIIIIII", "chooseFood: $errorBody")
+            val errorResponse = Gson().fromJson(errorBody, AnalyzeResponse::class.java)
+            emit(ResultState.Error(errorResponse.toString()))
         }
     }
 
@@ -67,7 +70,7 @@ class NyamRepository private constructor(
         }
     }
 
-    fun uploadImage(id: String, imageFile: File) = liveData {
+    fun analyzeImage(id: String, imageFile: File) = liveData {
         emit(ResultState.Loading)
         val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
         val multipartBody = MultipartBody.Part.createFormData(
@@ -76,7 +79,7 @@ class NyamRepository private constructor(
             requestImageFile
         )
         try {
-            val successResponse = apiService.uploadImage(id, multipartBody)
+            val successResponse = apiService.analyzeImage(id, multipartBody)
             var id = 0
             val recipesList = successResponse.recipes.map { recipe ->
                 RecipesEntity(
@@ -100,7 +103,39 @@ class NyamRepository private constructor(
             emit(ResultState.Success(successResponse))
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
-            Log.d("REPOSITORY WOIIIIIIIIII", "uploadImage: $errorBody")
+            emit(ResultState.Error(errorBody.toString()))
+        } catch (e: Exception) {
+            emit(ResultState.Error(e.message.toString()))
+        }
+    }
+    fun analyzeFood(id: String, text: String) = liveData {
+        emit(ResultState.Loading)
+        try {
+            val successResponse = apiService.analyzeFood(id, TextBody(text))
+            var id = 0
+            val recipesList = successResponse.recipes.map { recipe ->
+                RecipesEntity(
+                    id = id++,
+                    image = recipe.image,
+                    foodname = recipe.foodname,
+                    dishType = recipe.dishType.toString(),
+                    mealType = recipe.mealType.toString(),
+                    howToCook = recipe.howToCook,
+                    ingredients = recipe.ingredients.toString(),
+                    sourceRecipes = recipe.sourceRecipes,
+                    cuisineType = recipe.cuisineType.toString(),
+                    calories = recipe.fulfilledNeeds.calories as Double,
+                    fat = recipe.fulfilledNeeds.fat as Double,
+                    carbs = recipe.fulfilledNeeds.carbs as Double,
+                    protein = recipe.fulfilledNeeds.protein as Double
+                )
+            }
+            recipesDao.deleteAllRecipes()
+            recipesDao.insertRecipes(recipesList)
+            emit(ResultState.Success(successResponse))
+        } catch (e: HttpException) {
+            val errorBody = e.response()?.errorBody()?.string()
+            Log.d("REPOSITORY WOIIIIIIIIII", "uploadText: $errorBody")
 //        val errorResponse = Gson().fromJson(errorBody, AnalyzeResponse::class.java)
             emit(ResultState.Error(errorBody.toString()))
         } catch (e: Exception) {
