@@ -3,18 +3,12 @@ package com.example.nyam.view.onboarding
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.nyam.MainActivity
 import com.example.nyam.R
 import com.example.nyam.adapter.OnBoardingAdapter
 import com.example.nyam.databinding.ActivityOnboardingBinding
-import com.example.nyam.helper.ViewModelFactory
-import com.example.nyam.view.MainViewModel
 import com.example.nyam.view.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -32,9 +26,6 @@ class OnBoardingActivity : AppCompatActivity() {
     private var _binding: ActivityOnboardingBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel by viewModels<MainViewModel> {
-        ViewModelFactory.getInstance(this)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +45,7 @@ class OnBoardingActivity : AppCompatActivity() {
         binding.btnSkip.setOnClickListener {
             val intent = Intent(baseContext, LoginActivity::class.java)
             startActivity(intent)
-}
+        }
 
         val numberOfScreens = resources.getStringArray(R.array.onboard_header).size
         val onBoardingAdapter = OnBoardingAdapter(this, numberOfScreens)

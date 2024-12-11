@@ -7,5 +7,7 @@ class FoodDetailViewModel(private val repository: NyamRepository) : ViewModel() 
 
     fun getDetailRecipes(id : Int) = repository.getDetailRecipes(id)
 
+    fun getDetailHistory(id : Int) = repository.getDetailHistory(id)
+
     fun chooseFood(id: String, index: Int) = repository.chooseFood(id,index)
 }

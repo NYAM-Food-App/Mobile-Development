@@ -72,7 +72,7 @@ class customDropDialog @JvmOverloads constructor(
                 for (j in selectedAllergy.indices) {
 
                     selectedAllergy[j] = false
-
+                    selectedAlergy.clear()
                     listAllergy.clear()
 
                     text = ""

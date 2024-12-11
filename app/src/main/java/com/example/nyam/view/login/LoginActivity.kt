@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -18,8 +17,6 @@ import androidx.lifecycle.lifecycleScope
 import com.example.nyam.MainActivity
 import com.example.nyam.R
 import com.example.nyam.databinding.ActivityLoginBinding
-import com.example.nyam.helper.ViewModelFactory
-import com.example.nyam.view.MainViewModel
 import com.example.nyam.view.register.RegisterDataActivity
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
@@ -61,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun goToRegister(){
+    private fun goToRegister() {
         val intent = Intent(baseContext, RegisterDataActivity::class.java)
         startActivity(intent)
     }
@@ -92,10 +89,9 @@ class LoginActivity : AppCompatActivity() {
                     context = this@LoginActivity,
                 )
                 handleSignIn(result)
-            } catch (e:GetCredentialCancellationException){
+            } catch (e: GetCredentialCancellationException) {
                 return@launch
-            }
-            catch (e: GetCredentialException) { //import from androidx.CredentialManager
+            } catch (e: GetCredentialException) { //import from androidx.CredentialManager
                 Log.d("Error", e.message.toString())
             }
         }

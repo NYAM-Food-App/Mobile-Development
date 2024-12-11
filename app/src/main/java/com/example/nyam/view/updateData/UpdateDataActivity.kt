@@ -6,8 +6,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.nyam.R
 import com.example.nyam.data.ResultState
 import com.example.nyam.data.remote.response.UpdateBody
@@ -50,10 +48,11 @@ class UpdateDataActivity : AppCompatActivity() {
     }
 
     private fun updateUserData() {
-        if (!fieldValidation() ) {
+        if (!fieldValidation()) {
             return
         }
-        viewmodel.updateUser(auth.currentUser!!.uid,
+        viewmodel.updateUser(
+            auth.currentUser!!.uid,
             UpdateBody(
                 fullname = binding.etName.text.toString(),
                 birthdate = binding.etAge.text.toString(),
@@ -75,7 +74,7 @@ class UpdateDataActivity : AppCompatActivity() {
 
                 is ResultState.Success -> {
                     loadingDialog.dismiss()
-                    Toast.makeText(this, "Update Berhasil", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Update Success", Toast.LENGTH_SHORT).show()
                     finish()
                 }
 
@@ -89,21 +88,23 @@ class UpdateDataActivity : AppCompatActivity() {
 
 
     private fun getUserData() {
-        viewmodel.loginResult.observe(this){ result ->
-            when(result){
+        viewmodel.loginResult.observe(this) { result ->
+            when (result) {
                 is ResultState.Loading -> {
                 }
+
                 is ResultState.Success -> {
-                    with(result.data){
+                    with(result.data) {
                         binding.etName.setText(fullname)
                         binding.etAge.setText(birthdate)
-                        binding.spinGender.id = gender?:0
+                        binding.spinGender.id = gender ?: 0
                         binding.etWeight.setText(weight.toString())
                         binding.etHeight.setText(height.toString())
                     }
                 }
+
                 is ResultState.Error -> {
-                    Toast.makeText(this, "Gagal memuat data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Can't load data", Toast.LENGTH_SHORT).show()
                 }
             }
         }

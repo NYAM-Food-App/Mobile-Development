@@ -19,12 +19,10 @@ import retrofit2.http.Path
 
 interface ApiService {
 
-
     @GET("user/{id}")
     suspend fun getUser(
         @Path("id") id: String
     ): UserData
-
 
     @Multipart
     @POST("analyze/{id}")
@@ -33,13 +31,11 @@ interface ApiService {
         @Part file: MultipartBody.Part
     ): AnalyzeResponse
 
-
     @POST("analyze/text/{id}")
     suspend fun analyzeFood(
         @Path("id") id: String,
         @Body queryText :TextBody
     ): AnalyzeResponse
-
 
     @POST("choose/food/{id}")
     suspend fun chooseFood(

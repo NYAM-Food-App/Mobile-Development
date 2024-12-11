@@ -35,32 +35,13 @@ class RecipesAdapter :
                 tvCalories.text = myFormat.format(recipes.calories)
 
                 itemView.setOnClickListener {
-                    //TODO:Consider Animation
-//                    val optionsCompat: ActivityOptionsCompat =
-//                        ActivityOptionsCompat.makeSceneTransitionAnimation(
-//                            itemView.context as Activity,
-//                            Pair(ivProfile, "profile"),
-//                            Pair(tvItemName, "name"),
-//                            Pair(ivItemPhoto, "photo"),
-//                            Pair(tvCreatedAt,"time")
-//                        )
                     val intent = Intent(itemView.context, FoodDetailActivity::class.java)
                     intent.putExtra(FoodDetailActivity.FOOD_ID, recipes.id)
                     itemView.context.startActivity(intent)
-//                    itemView.context.startActivity(intent,optionsCompat.toBundle())
 
                 }
             }
 
-        }
-
-        private fun parseDateString(dateString: String): String? {
-            val inputFormat = SimpleDateFormat(
-                "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()
-            )
-            val outputFormat = SimpleDateFormat("dd-MM-yyyy | HH:mm", Locale.getDefault())
-            val date: Date? = inputFormat.parse(dateString)
-            return date?.let { outputFormat.format(it) }
         }
     }
 

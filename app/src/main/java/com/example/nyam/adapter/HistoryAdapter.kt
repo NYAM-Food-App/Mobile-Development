@@ -15,6 +15,7 @@ import com.example.nyam.data.local.entity.HistoryEntity
 import com.example.nyam.data.local.entity.RecipesEntity
 import com.example.nyam.databinding.CardFoodBinding
 import com.example.nyam.view.detail.FoodDetailActivity
+import com.example.nyam.view.detail.FoodDetailHistoryActivity
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -34,18 +35,16 @@ class HistoryAdapter :
                 val myFormat = DecimalFormat("#")
                 tvCalories.text = myFormat.format(history.calories)
 
+                itemView.setOnClickListener {
+                    val intent = Intent(itemView.context, FoodDetailHistoryActivity::class.java)
+                    intent.putExtra(FoodDetailHistoryActivity.FOOD_ID, history.id)
+                    itemView.context.startActivity(intent)
+
+                }
             }
 
         }
 
-        private fun parseDateString(dateString: String): String? {
-            val inputFormat = SimpleDateFormat(
-                "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()
-            )
-            val outputFormat = SimpleDateFormat("dd-MM-yyyy | HH:mm", Locale.getDefault())
-            val date: Date? = inputFormat.parse(dateString)
-            return date?.let { outputFormat.format(it) }
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

@@ -51,13 +51,12 @@ class NyamRepository private constructor(
         }
         catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
-            Log.d("REPOSITORY WOIIIIIIIIII", "chooseFood: $errorBody")
             val errorResponse = Gson().fromJson(errorBody, AnalyzeResponse::class.java)
             emit(ResultState.Error(errorResponse.toString()))
         }
     }
 
-    fun getDetailRecipes(id: Int) = recipesDao.getDetailRecipes(id)
+    fun getDetailHistory(id: Int) = historyDao.getDetailHistory(id)
 
     fun getRecipes(): LiveData<ResultState<List<RecipesEntity>>> = liveData {
         emit(ResultState.Loading)
@@ -135,13 +134,13 @@ class NyamRepository private constructor(
             emit(ResultState.Success(successResponse))
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
-            Log.d("REPOSITORY WOIIIIIIIIII", "uploadText: $errorBody")
-//        val errorResponse = Gson().fromJson(errorBody, AnalyzeResponse::class.java)
             emit(ResultState.Error(errorBody.toString()))
         } catch (e: Exception) {
             emit(ResultState.Error(e.message.toString()))
         }
     }
+
+    fun getDetailRecipes(id: Int) = recipesDao.getDetailRecipes(id)
 
     fun getHistory(id: String): LiveData<ResultState<List<HistoryEntity>>> = liveData {
         emit(ResultState.Loading)
@@ -169,8 +168,6 @@ class NyamRepository private constructor(
             historyDao.insertHistory(history)
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
-            Log.d("REPOSITORY WOIIIIIIIIII", "GetHistory: $errorBody")
-            val errorResponse = Gson().fromJson(errorBody, HistoryResponse::class.java)
             emit(ResultState.Error(errorBody.toString()))
         } catch (e: Exception) {
             emit(ResultState.Error(e.message.toString()))
