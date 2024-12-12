@@ -53,7 +53,11 @@
    ```bash
    git clone https://github.com/NYAM-Food-App/Mobile-Development.git
 2. Open the project in android studio
-3. Run the app on an emulator or physical device.
-4. You can download app-debug :
+3. Input base url on local properties & google service json
+   ```bash
+   BASE_URL =https://nyamdev-589080247823.asia-southeast2.run.app/
+   google-services.json
+5. Run the app on an emulator or physical device.
+6. You can download app-debug :
    ```bash
    https://github.com/NYAM-Food-App/Mobile-Development/releases
