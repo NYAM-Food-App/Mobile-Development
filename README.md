@@ -54,3 +54,6 @@
    git clone https://github.com/NYAM-Food-App/Mobile-Development.git
 2. Open the project in android studio
 3. Run the app on an emulator or physical device.
+4. You can download app-debug :
+   ```bash
+   https://github.com/NYAM-Food-App/Mobile-Development/releases
