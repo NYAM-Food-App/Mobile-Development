@@ -35,24 +35,16 @@
   <img src="https://github.com/user-attachments/assets/06ea8689-6a17-421b-b755-061da413f113" alt="Screenshot 3" width="130">
 </div>
 
-4. **Dashboard Menu**
+4. **Dashboard & Camera Menu**
 <div style="display: flex; justify-content: space-around;">
   <img src="https://github.com/user-attachments/assets/e2c267bf-5067-4254-8170-e3ad39a33ca3" alt="Screenshot 2" width="130">
-</div>
-
-5. **Camera Menu**
-<div style="display: flex; justify-content: space-around;">
   <img src="https://github.com/user-attachments/assets/54a92785-9e2e-481d-8004-8db68c684776" alt="Screenshot 2" width="130">
 </div>
 
-6. **Recommendations Menu**
+6. **Recommendations & History Menu**
 <div style="display: flex; justify-content: space-around;">
   <img src="https://github.com/user-attachments/assets/6119ec9b-4f9d-4fff-9f0f-2ff6a2b5b45d" alt="Screenshot 2" width="130">
   <img src="https://github.com/user-attachments/assets/5c20726a-341a-41bd-b3e9-4b864a19c8fe" alt="Screenshot 2" width="130">
-</div>
-
-7. **History Menu**
-<div style="display: flex; justify-content: space-around;">
   <img src="https://github.com/user-attachments/assets/61482018-3a8a-4e23-b60a-36ba52ebf119" alt="Screenshot 2" width="130">
 </div>
 
