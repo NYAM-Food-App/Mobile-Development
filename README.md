@@ -1,4 +1,4 @@
-# NYAM - Not Your Average Manu 🍚🍴
+# NYAM - Not Your Average Menu 🍚🍴
 
 **NYAM** is a diet application designed to help users find nutritious food recommendations based on their needs. This app includes features such as ingredient scanning, recipes, and nutritional information, making it perfect for anyone following a diet program or aiming for a healthier lifestyle.
 
@@ -58,6 +58,4 @@
    BASE_URL =https://nyamdev-589080247823.asia-southeast2.run.app/
    google-services.json
 5. Run the app on an emulator or physical device.
-6. You can download app-debug :
-   ```bash
-    https://github.com/NYAM-Food-App/Mobile-Development/releases/tag/v1.0.0
+6. You can download the application through this [release link](https://github.com/NYAM-Food-App/Mobile-Development/releases/tag/v1.0.0).
