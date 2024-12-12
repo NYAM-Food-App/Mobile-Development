@@ -60,4 +60,4 @@
 5. Run the app on an emulator or physical device.
 6. You can download app-debug :
    ```bash
-   https://github.com/NYAM-Food-App/Mobile-Development/releases
+    https://github.com/NYAM-Food-App/Mobile-Development/releases/tag/v1.0.0
