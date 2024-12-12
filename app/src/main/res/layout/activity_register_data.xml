@@ -79,6 +79,8 @@
                 android:fontFamily="@font/inter_medium"
                 android:hint="Fill your name"
                 android:maxLines="1"
+                android:inputType="text"
+                android:nextFocusDown="@id/spin_gender"
                 android:padding="10dp"
                 android:textSize="14sp" />
 
