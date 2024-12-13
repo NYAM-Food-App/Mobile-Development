@@ -55,7 +55,8 @@
 2. Open the project in android studio
 3. Input base url on local properties & google service json
    ```bash
-   BASE_URL =https://nyamdev-589080247823.asia-southeast2.run.app/
+   BASE_URL =https://nyam-945639190701.asia-southeast2.run.app
    google-services.json
+4. Make sure your_web_client_id in strings.xml is from Web-Client ID firebase & Make sure your_web_client_id in strings.xml is from Web-Client ID firebase
 5. Run the app on an emulator or physical device.
 6. You can download the application through this [release link](https://github.com/NYAM-Food-App/Mobile-Development/releases/tag/v1.0.0).
