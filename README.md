@@ -57,6 +57,7 @@
    ```bash
    BASE_URL =https://nyam-945639190701.asia-southeast2.run.app
    google-services.json
-4. Make sure your_web_client_id in strings.xml is from Web-Client ID firebase & Make sure your_web_client_id in strings.xml is from Web-Client ID firebase
-5. Run the app on an emulator or physical device.
-6. You can download the application through this [release link](https://github.com/NYAM-Food-App/Mobile-Development/releases/tag/v1.0.0).
+4. Add OAuth 2.0 Client Id with your SHA-1 fingerprint
+5. Make sure your_web_client_id in strings.xml is from Web-Client ID firebase & Make sure your_web_client_id in strings.xml is from Web-Client ID firebase
+6. Run the app on an emulator or physical device.
+7. You can download the application through this [release link](https://github.com/NYAM-Food-App/Mobile-Development/releases/tag/v1.0.0).
